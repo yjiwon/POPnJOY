@@ -1,10 +1,11 @@
 package org.popcon.service;
 
 import lombok.AllArgsConstructor;
-import org.helpme.mapper.MemberMapper;
 import org.popcon.domain.MemberVO;
+import org.popcon.mappers.GoodsMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
+
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -15,9 +16,7 @@ import javax.servlet.http.HttpSession;
 @AllArgsConstructor
 public class GoodsServiceImpl implements GoodsService {
 
-	@Autowired
-	private MemberMapper memberMapper;
-	private JavaMailSender mailSender;
+	private GoodsMapper mapper;
 
 
 	@Override

@@ -2,6 +2,7 @@ package org.popcon.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.popcon.domain.MemberVO;
 import org.popcon.service.MemberService;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
-@Log4j
+@Slf4j
 @RequestMapping ("/pos/*")
 public class MemberController {
 
@@ -50,7 +51,7 @@ public class MemberController {
         } else {
             session.setAttribute("member", null);
             rttr.addFlashAttribute("msg", false);
-            return "redirect:/member/signin";
+            return "redirect:/pos/signin";
         }
 
         return "redirect:/";

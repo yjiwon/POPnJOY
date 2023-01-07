@@ -3,6 +3,7 @@ package org.popcon.controller;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.popcon.service.GoodsService;
 
 import org.springframework.stereotype.Controller;
@@ -12,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@Log4j2
-@RequestMapping ("/goods/")
+@Slf4j
+@RequestMapping ("/goods/*")
 public class GoodsController {
 
     private final GoodsService service ;
-
 
     @GetMapping("/list")
     public void list(Model model){

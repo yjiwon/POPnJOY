@@ -22,8 +22,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
@@ -39,10 +38,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	runtimeOnly ("com.oracle.database.jdbc:ojdbc8")
 
-	implementation("org.springframework.security:spring-security-core")
-	implementation("org.springframework.security:spring-security-web")
-	implementation("org.springframework.security:spring-security-config")
-
+	implementation("org.springframework.boot:spring-boot-starter-security")
 
 }
 
