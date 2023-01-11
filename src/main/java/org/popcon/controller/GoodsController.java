@@ -25,7 +25,7 @@ public class GoodsController {
         log.info("list............." );
 
         model.addAttribute("result");
-        @GetMapping("/list")
+       
 
     }
 }

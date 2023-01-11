@@ -6,7 +6,7 @@ import org.popcon.domain.MemberVO;
 
 @Mapper
 public interface GoodsMapper {
-	public MemberVO signin(MemberVO vo) throws Exception;
+	public MemberVO (MemberVO vo) throws Exception;
 
 
 }
