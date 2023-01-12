@@ -8,9 +8,9 @@
 		있습니다. -->
 
 	<select id="signin" resultType="org.popcon.domain.MemberVO">
-		select userId, userPass
+		select userId, userPass, userName, verify
 		from
-		member where userId = #{userId} and userPass = #{userPass}
+		member where userId = #{userId}
 	</select>
 
 </mapper>

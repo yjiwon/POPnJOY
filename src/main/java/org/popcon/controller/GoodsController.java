@@ -24,7 +24,9 @@ public class GoodsController {
 
         log.info("list............." );
 
-        model.addAttribute("result");
+        model.addAttribute("list",list);
+
+        return "/goods/list";
        
 
     }
