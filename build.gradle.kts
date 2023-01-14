@@ -40,6 +40,10 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
+	// https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
+	implementation("net.sf.json-lib:json-lib:2.4")
+
+
 }
 
 tasks.withType<Test> {
