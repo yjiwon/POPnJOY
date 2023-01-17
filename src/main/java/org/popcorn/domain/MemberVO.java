@@ -1,8 +1,6 @@
-package org.popcon.domain;
+package org.popcorn.domain;
 
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class MemberVO {

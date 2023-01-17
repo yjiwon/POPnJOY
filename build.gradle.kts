@@ -30,6 +30,7 @@ dependencies {
 	implementation("org.apache.directory.studio:org.apache.commons.io:2.4")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
+
 	compileOnly("org.projectlombok:lombok")
 	testImplementation("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -39,9 +40,8 @@ dependencies {
 	runtimeOnly ("com.oracle.database.jdbc:ojdbc8")
 
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation ("org.json:json:20200518")
 
-	// https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
-	implementation("net.sf.json-lib:json-lib:2.4")
 
 
 }

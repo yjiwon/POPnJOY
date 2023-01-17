@@ -1,6 +1,6 @@
-package org.popcon.dao;
+package org.popcorn.dao;
 
-import org.popcon.domain.MemberVO;
+import org.popcorn.domain.MemberVO;
 import org.springframework.stereotype.Repository;
 
 

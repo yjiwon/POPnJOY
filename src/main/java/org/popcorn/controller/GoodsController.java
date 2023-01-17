@@ -1,10 +1,9 @@
-package org.popcon.controller;
+package org.popcorn.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
-import org.popcon.service.GoodsService;
+import org.popcorn.service.GoodsService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,10 +1,8 @@
-package org.popcon.service;
+package org.popcorn.service;
 
 import lombok.AllArgsConstructor;
-import org.popcon.domain.MemberVO;
-import org.popcon.mappers.GoodsMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.popcorn.domain.MemberVO;
+import org.popcorn.mappers.GoodsMapper;
 
 import org.springframework.stereotype.Service;
 

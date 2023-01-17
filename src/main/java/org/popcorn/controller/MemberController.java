@@ -1,10 +1,9 @@
-package org.popcon.controller;
+package org.popcorn.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.popcon.domain.MemberVO;
-import org.popcon.service.MemberService;
+import org.popcorn.domain.MemberVO;
+import org.popcorn.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,7 +29,6 @@ public class MemberController {
     BCryptPasswordEncoder passEncoder;
 
     @ResponseBody
-    @GetMapping("/signin")
     public void getSignin(MemberVO vo, HttpServletRequest request) throws Exception {
         logger.info("login......");
 
@@ -58,7 +56,6 @@ public class MemberController {
     }
 
     // 로그아웃
-    @GetMapping("/signout")
     public String signout(HttpSession session) throws Exception {
         logger.info("logout.....");
 

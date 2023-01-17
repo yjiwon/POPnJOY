@@ -1,10 +1,10 @@
-package org.popcon.service;
+package org.popcorn.service;
 
-import org.popcon.domain.MemberVO;
+import org.popcorn.domain.MemberVO;
 
 import javax.servlet.http.HttpSession;
 
-public interface AdminService {
+public interface GoodsService {
 	public MemberVO signin(MemberVO vo) throws Exception;
 
 	public void signout(HttpSession session) throws Exception;

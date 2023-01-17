@@ -7,10 +7,11 @@
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어 
 		있습니다. -->
 
-	<select id="signin" resultType="org.popcorn.domain.MemberVO">
-		select userId, userPass, userName, verify
-		from
-		member where userId = #{userId}
+	<select id="signin" resultType="org.popcorn.domain.CatVO">
+		select
+		level, catName, catCode, catCodeRef
+		from cat
+		start with catCodeRef is null connect by prior catCode = catCodeRef
 	</select>
 
 </mapper>

@@ -1,17 +1,17 @@
-package org.popcon.service;
+package org.popcorn.service;
 
-import org.popcon.dao.MemberDAO;
-import org.popcon.domain.MemberVO;
-import org.popcon.mappers.MemberMapper;
+import org.popcorn.dao.MemberDAO;
+import org.popcorn.domain.MemberVO;
+
+import org.popcorn.mappers.MemberMapper;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
 @Service
-public class AdminServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService {
 
 	private MemberMapper mapper;
-	private MemberDAO dao;
 
 	@Override
 	public MemberVO signin(MemberVO vo) throws Exception {

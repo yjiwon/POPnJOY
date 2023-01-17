@@ -1,7 +1,7 @@
-package org.popcon.mappers;
+package org.popcorn.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.popcon.domain.MemberVO;
+import org.popcorn.domain.MemberVO;
 
 
 @Mapper

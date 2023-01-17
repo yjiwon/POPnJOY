@@ -1,4 +1,4 @@
-package org.popcon.config;
+package org.popcorn.config;
 
 
 import lombok.RequiredArgsConstructor;

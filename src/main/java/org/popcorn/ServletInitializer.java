@@ -1,4 +1,4 @@
-package org.popcon;
+package org.popcorn;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

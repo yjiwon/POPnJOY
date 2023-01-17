@@ -1,4 +1,4 @@
-package org.popcon.domain;
+package org.popcorn.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
