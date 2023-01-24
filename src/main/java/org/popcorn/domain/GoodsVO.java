@@ -21,4 +21,6 @@ public class GoodsVO {
 	private String gdsImage;
 	private Date gdsDete;
 
+	public void gdsImage(String uploadFile) {
+	}
 }

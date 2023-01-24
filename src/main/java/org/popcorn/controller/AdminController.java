@@ -124,15 +124,47 @@ public class AdminController {
 
     }
     @GetMapping("/view")
-    public void getGoodsView(@RequestParam("n") int gdsNum, Model model) throws Exception {
+    public void getGoodsView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get goods view");
 
-        GoodsViewVO goods = service.goodsView(gdsNum);
+        GoodsViewVO goods = service.goodsView(gdsId);
         model.addAttribute("goods", goods);
     }
 
 
+    @GetMapping("/modify")
+    public void getGoodsModify(@RequestParam("n") int gdsNum, Model model) throws Exception {
+        // @RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 gdsNum에 저장
+
+        logger.info("modify.......");
     }
+
+    @PostMapping("/modify")
+    public String modifyPOST(
+            GoodsVO GoodsVO,@RequestParam(name = "attachFile", required = false) MultipartFile file,
+            RedirectAttributes rttr) throws Exception {
+        logger.info("mod post............");
+        if (!file.getOriginalFilename().equals("") && checkFile(file)){
+            GoodsVO.gdsImage(uploadFile(file.getOriginalFilename(), file.getBytes()));
+        } else {
+            GoodsVO.gdsImage("");
+        }
+         service.goodsModify(GoodsVO);
+        rttr.addFlashAttribute("msg", "SUCCESS");
+        return "redirect:/admin/view?gdsId=" + GoodsVO.getGdsId();
+    }
+
+    @PostMapping("/delete")
+    public String postGoodsDelete(@RequestParam("n") int gdsId) throws Exception {
+        // @RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 gdsNum에 저장
+
+        logger.info("post goods delete");
+        service.goodsDelete(gdsId);
+        return "redirect:/admin/index";
+    }
+
+
+}
 
 
 

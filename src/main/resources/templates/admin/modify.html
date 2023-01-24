@@ -50,9 +50,11 @@
 
             <form th:role="form" th:method="post" th:autocomplete="off">
 
+                <input type="hidden" name="gdsId" th:value="${goods.gdsId}">
+
                 <div class="inputArea">
                     <label>카테고리</label>
-                    <th:select name="catCode">
+                    <th:select name="catCode" th:value="${goods.catCode}">
                         <option value="popcorn">팝콘</option>
                         <option value="drink">음료</option>
                         <option value="hotdog">핫도그</option>
@@ -61,26 +63,35 @@
 
                 <div class="inputArea">
                     <label for="gdsName">상품명</label>
-                    <input type="text" id="gdsName" name="gdsName" />
+                    <input type="text" id="gdsName" name="gdsName" th:value="${goods.gdsName}" />
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsPrice">상품가격</label>
-                    <input type="text" id="gdsPrice" name="gdsPrice" />
+                    <input type="text" id="gdsPrice" name="gdsPrice"th:value="${goods.gdsPrice}" />
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsStock">상품수량</label>
-                    <input type="text" id="gdsStock" name="gdsStock" />
+                    <input type="text" id="gdsStock" name="gdsStock"th:value="${goods.gdsStock}" />
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsDes">상품소개</label>
-                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes"></textarea>
+                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" th:value="${goods.gdsDes}"></textarea>
                 </div>
 
                 <div class="inputArea">
-                    <button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
+                    <button type="submit" id="update_Btn" class="btn btn-primary">수정</button>
+                    <button type="button" id="back_Btn" class="btn btn-primary">취소</button>
+
+                    <script  th:inline="javascript">
+                            $("#back_Btn").click(function(){
+                                 //history.back();
+                            location.href = "/admin/list";
+                             });
+                    </script>
+
                 </div>
                 </div>
             </form>

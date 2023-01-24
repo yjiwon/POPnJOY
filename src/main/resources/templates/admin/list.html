@@ -30,6 +30,10 @@
 </style>
 
 
+   <style>
+#container_box table td { width:100px; }
+ </style>
+
     </head>
 
     <body>
@@ -46,7 +50,38 @@
         </aside>
         </section>
 
-        <div id="container_box"> 본문영역
+        <div id="container_box">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>카테고리</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                    <th>등록날짜</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:forEach items="${list}" var="list">
+                    <tr>
+                        <td> <a th:href="@{/admin/view(gdsId=[[${list.gdsId}]]>">
+                            [[${list.gdsId}]]
+                        </a>
+                           </td>
+                        <td>[[${list.gdsName}]]</td>
+                        <td>[[${list.cateCode}]]</td>
+                        <td>[[${#temporals.format(list.gdsPrice, '###,###,###')}]]</td>
+                        <td>[[${list.gdsStock}]]</td>
+                        <td>[[${#temporals.format(list.gdsDate, 'yyyy-MM-dd')}]]</td>
+                    </tr>
+                </th:forEach>
+                </tbody>
+            </table>
+
+
+
             </div>
 
 

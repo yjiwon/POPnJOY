@@ -9,7 +9,7 @@
 
 	<!-- 상품 등록 -->
 	<insert id="register">
-		insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,
+		insert into goods (gdsId, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,
 		gdsImg, gdsThumbImg)
 		values (goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
 		#{gdsImg}, #{gdsThumbImg})
@@ -17,25 +17,25 @@
 
 	<!-- 상품 목록 -->
 
-	<select id="goodslist" resultType="com.popcorn.domain.GoodsViewVO">
+	<select id="goodsList" resultType="com.popcorn.domain.GoodsViewVO">
 		select
-		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		g.gdsId, g.gdsName, g.catCode, c.catCodeRef, c.catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 		g.gdsImg, g.gdsThumbImg
 		from goods g
-		inner join goods_category c
-		on g.cateCode = c.cateCode
+		inner join cat c
+		on g.catCode = c.catCode
 	</select>
 
 
 	<!-- 상품 조회 + 카테고리 조인-->
 	<select id="goodsView" resultType="com.popcorn.domain.GoodsViewVO">
 		select
-		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		g.gdsId, g.gdsName, g.catCode, c.catCodeRef, c.catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 		g.gdsImg, g.gdsThumbImg
-		from tbl_goods g
-		inner join goods_category c
-		on g.cateCode = c.cateCode
-		where g.gdsNum = #{gdsNum}
+		from goods g
+		inner join cat c
+		on g.cateCode = c.catCode
+		where g.gdsId = #{gdsId}
 	</select>
 
 	<!-- 상품 수정 -->
@@ -43,7 +43,7 @@
 		update goods
 		set
 		gdsName = #{gdsName},
-		cateCode = #{cateCode},
+		cateCode = #{catCode},
 		gdsPrice = #{gdsPrice},
 		gdsStock = #{gdsStock},
 		gdsDes = #{gdsDes},
@@ -51,14 +51,14 @@
 		gdsImg = #{gdsImg},
 		gdsThumbImg = #{gdsThumbImg}
 
-		where gdsNum = ${gdsNum}
+		where gdsId = ${gdsId}
 	</update>
 
 	<!-- 상품 삭제 -->
 	<delete id="goodsDelete">
 		delete
 		goods
-		where gdsNum = #{gdsNum}
+		where gdsId = #{gdsId}
 	</delete>
 
 	<!-- 카테고리 -->
