@@ -7,11 +7,79 @@
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어 
 		있습니다. -->
 
-	<select id="signin" resultType="org.popcorn.domain.CatVO">
+	<!-- 상품 등록 -->
+	<insert id="register">
+		insert into tbl_goods (gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,
+		gdsImg, gdsThumbImg)
+		values (goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+		#{gdsImg}, #{gdsThumbImg})
+	</insert>
+
+	<!-- 상품 목록 -->
+
+	<select id="goodslist" resultType="com.popcorn.domain.GoodsViewVO">
 		select
-		level, catName, catCode, catCodeRef
-		from cat
-		start with catCodeRef is null connect by prior catCode = catCodeRef
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
+		from goods g
+		inner join goods_category c
+		on g.cateCode = c.cateCode
 	</select>
+
+
+	<!-- 상품 조회 + 카테고리 조인-->
+	<select id="goodsView" resultType="com.popcorn.domain.GoodsViewVO">
+		select
+		g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		g.gdsImg, g.gdsThumbImg
+		from tbl_goods g
+		inner join goods_category c
+		on g.cateCode = c.cateCode
+		where g.gdsNum = #{gdsNum}
+	</select>
+
+	<!-- 상품 수정 -->
+	<update id="goodsModify">
+		update goods
+		set
+		gdsName = #{gdsName},
+		cateCode = #{cateCode},
+		gdsPrice = #{gdsPrice},
+		gdsStock = #{gdsStock},
+		gdsDes = #{gdsDes},
+
+		gdsImg = #{gdsImg},
+		gdsThumbImg = #{gdsThumbImg}
+
+		where gdsNum = ${gdsNum}
+	</update>
+
+	<!-- 상품 삭제 -->
+	<delete id="goodsDelete">
+		delete
+		goods
+		where gdsNum = #{gdsNum}
+	</delete>
+
+	<!-- 카테고리 -->
+	<sql id="cat">
+		<if test="catCode != null" >
+			<if test="catCode == popcorn">
+					and catCode = popcorn
+			</if>
+				<if test="catCode == drink">
+					and catCode = drink
+				</if>
+					<if test="catCode == hotdog">
+						and catCode = hotdog
+					</if>
+						<if test="catCode == Squid">
+							and catCode = Squid
+						</if>
+
+			</if>
+
+	</sql>
+
 
 </mapper>

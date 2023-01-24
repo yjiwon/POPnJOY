@@ -6,6 +6,7 @@ import org.json.JSONArray;
 
 import org.popcorn.domain.CatVO;
 import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.GoodsViewVO;
 import org.popcorn.service.AdminService;
 import org.popcorn.service.GoodsService;
 import org.slf4j.Logger;
@@ -24,8 +25,6 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
-
-import static sun.awt.shell.Win32ShellFolderManager2.checkFile;
 
 
 @Controller
@@ -74,7 +73,7 @@ public class AdminController {
         }else {
             GoodsVO.setUserId("userId1");
         }
-        AdminService.register(GoodsVO);
+        service.register(GoodsVO);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
 
@@ -112,6 +111,25 @@ public class AdminController {
 
     //
 
+    @GetMapping("/list")
+    public void getGoodsList(Model model) throws Exception {
+        logger.info("get member list");
+        //	logger.info(cri.toString());
+
+        List<GoodsViewVO> list = service.goodsList();
+
+        //	model.addAttribute("list", adminMemberService.listSearchCriteria(cri));
+        model.addAttribute("list", list);
+
+
+    }
+    @GetMapping("/view")
+    public void getGoodsView(@RequestParam("n") int gdsNum, Model model) throws Exception {
+        logger.info("get goods view");
+
+        GoodsViewVO goods = service.goodsView(gdsNum);
+        model.addAttribute("goods", goods);
+    }
 
 
     }
