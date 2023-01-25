@@ -16,10 +16,10 @@ public interface AdminMapper {
 	public void register(GoodsVO vo) throws Exception;
 
 	// 상품목록
-	public List<GoodsViewVO> goodsList() throws Exception;
+	public List<GoodsVO> goodsList() throws Exception;
 
 	// 상품조회  + 카테고리 조인
-	public GoodsViewVO goodsView(int gdsId) throws Exception;
+	public GoodsVO goodsView(int gdsId) throws Exception;
 
 	// 상품 수정
 	public void goodsModify(GoodsVO vo) throws Exception;

@@ -60,37 +60,41 @@
             <form th:role="form" th:method="post" th:autocomplete="off">
 
                 <input type="hidden" name="gdsId" th:value="${goods.gdsId}">
+                <input type="hidden" name="userId" th:value="${goods.userId}">
 
-                <div class="inputArea">
-                    <label>카테고리</label>
-                    <th:select name="catCode">
-                        <option value="popcorn">팝콘</option>
-                        <option value="drink">음료</option>
-                        <option value="hotdog">핫도그</option>
-                        <option value="squid">오징어</option>
-                    </th:select>
+
+                    <div class="inputArea">
+                        <label for="gdsCat">카테고리</label>
+                        <input type="text" id="gdsCat" name="gdsCat" th:value="${goods.gdsCat}" />
+                    </div>
 
                 <div class="inputArea">
                     <label for="gdsName">상품명</label>
-                    <input type="text" id="gdsName" name="gdsName" th:value="${dto.bno} />
+                    <input type="text" id="gdsName" name="gdsName" th:value="${goods.gdsName}" />
                 </div>
+
 
                 <div class="inputArea">
                     <label for="gdsPrice">상품가격</label>
-                    <input type="text" id="gdsPrice" name="gdsPrice" th:value="${dto.bno} />
+                    <input type="text" id="gdsPrice" name="gdsPrice" th:value="${goods.gdsPrice}" />
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsStock">상품수량</label>
-                    <input type="text" id="gdsStock" name="gdsStock" th:value="${dto.bno}/>
+                    <input type="text" id="gdsStock" name="gdsStock" th:value="${goods.gdsStock}"/>
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsDes">상품소개</label>
-                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" th:value="${dto.bno} ></textarea>
+                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" th:value="${goods.gdsDes}" ></textarea>
+                    <div th:if="${goods.gdsImg != null}">
+                    <img alt="" src="/admin/displayFile?fileName=${goods.gdsImg}">
+                    </div>
                 </div>
 
-                <div class="inputArea">
+
+
+                    <div class="inputArea">
                     <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
                     <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
 
@@ -116,7 +120,7 @@
 
 
                 </div>
-                </div>
+
             </form>
 
 

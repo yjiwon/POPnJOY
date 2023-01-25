@@ -25,8 +25,6 @@ public class GoodsController {
 
         model.addAttribute("list",list);
 
-        return "/goods/list";
-       
 
     }
 }

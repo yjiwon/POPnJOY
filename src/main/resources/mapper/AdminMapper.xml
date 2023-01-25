@@ -9,33 +9,30 @@
 
 	<!-- 상품 등록 -->
 	<insert id="register">
-		insert into goods (gdsId, gdsName, cateCode, gdsPrice, gdsStock, gdsDes,
-		gdsImg, gdsThumbImg)
-		values (goods_seq.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
-		#{gdsImg}, #{gdsThumbImg})
+		insert into goods (gdsId,userId, gdsName,gdsCat , gdsPrice, gdsStock, gdsDes,
+		gdsImg, gdsDate)
+		values (goods_seq.nextval, #{gdsName}, #{gdsCat}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+		#{gdsImg}, sysdate)
 	</insert>
 
 	<!-- 상품 목록 -->
 
 	<select id="goodsList" resultType="com.popcorn.domain.GoodsViewVO">
 		select
-		g.gdsId, g.gdsName, g.catCode, c.catCodeRef, c.catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-		g.gdsImg, g.gdsThumbImg
-		from goods g
-		inner join cat c
-		on g.catCode = c.catCode
+		gdsId, gdsName, catCode, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		gdsImg
+		from goods
+		order by gdsId
 	</select>
 
 
 	<!-- 상품 조회 + 카테고리 조인-->
 	<select id="goodsView" resultType="com.popcorn.domain.GoodsViewVO">
 		select
-		g.gdsId, g.gdsName, g.catCode, c.catCodeRef, c.catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-		g.gdsImg, g.gdsThumbImg
-		from goods g
-		inner join cat c
-		on g.cateCode = c.catCode
-		where g.gdsId = #{gdsId}
+		gdsId, userId , gdsName, catCode, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		gdsImg
+	    from goods
+		where gdsId = #{gdsId}
 	</select>
 
 	<!-- 상품 수정 -->
@@ -43,13 +40,12 @@
 		update goods
 		set
 		gdsName = #{gdsName},
-		cateCode = #{catCode},
+		gdsCat = #{gdsCat},
 		gdsPrice = #{gdsPrice},
 		gdsStock = #{gdsStock},
 		gdsDes = #{gdsDes},
 
 		gdsImg = #{gdsImg},
-		gdsThumbImg = #{gdsThumbImg}
 
 		where gdsId = ${gdsId}
 	</update>
@@ -63,17 +59,17 @@
 
 	<!-- 카테고리 -->
 	<sql id="cat">
-		<if test="catCode != null" >
-			<if test="catCode == popcorn">
+		<if test="gdsCat != null" >
+			<if test="gdsCat == popcorn">
 					and catCode = popcorn
 			</if>
-				<if test="catCode == drink">
+				<if test="gdsCat == drink">
 					and catCode = drink
 				</if>
-					<if test="catCode == hotdog">
+					<if test="gdsCat == hotdog">
 						and catCode = hotdog
 					</if>
-						<if test="catCode == Squid">
+						<if test="gdsCat == Squid">
 							and catCode = Squid
 						</if>
 

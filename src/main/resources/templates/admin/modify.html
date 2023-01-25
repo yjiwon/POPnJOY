@@ -29,6 +29,26 @@
 	aside ul li a:hover { background:#eee; }
 </style>
 
+        <style>
+    .inputArea { margin:10px 0; }
+    select { width:100px; }
+    label { display:inline-block; width:70px; padding:5px; }
+    label[for='gdsDes'] { display:block; }
+    input { width:150px; }
+    textarea#gdsDes { width:400px; height:180px; }
+</style>
+
+        <script>
+var regExp = /[^0-9]/gi;
+
+$("#gdsPrice").keyup(function(){ numCheck($(this)); });
+$("#gdsStock").keyup(function(){ numCheck($(this)); });
+
+function numCheck(selector) {
+ var tempVal = selector.val();
+ selector.val(tempVal.replace(regExp, ""));
+}
+</script>
 
     </head>
 
@@ -48,13 +68,13 @@
 
         <div id="container_box">
 
-            <form th:role="form" th:method="post" th:autocomplete="off">
+            <form th:role="form" th:method="post" th:autocomplete="off" enctype="multipart/form-data">
 
                 <input type="hidden" name="gdsId" th:value="${goods.gdsId}">
 
                 <div class="inputArea">
                     <label>카테고리</label>
-                    <th:select name="catCode" th:value="${goods.catCode}">
+                    <th:select name="gdsCat" th:value="${goods.catCode}">
                         <option value="popcorn">팝콘</option>
                         <option value="drink">음료</option>
                         <option value="hotdog">핫도그</option>
@@ -80,6 +100,10 @@
                     <label for="gdsDes">상품소개</label>
                     <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" th:value="${goods.gdsDes}"></textarea>
                 </div>
+
+                    <tr>
+                        <td><input type="file" name="attachFile" style="font-size:1.0em;"></td>
+                    </tr>
 
                 <div class="inputArea">
                     <button type="submit" id="update_Btn" class="btn btn-primary">수정</button>

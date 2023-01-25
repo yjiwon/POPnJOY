@@ -2,13 +2,10 @@ package org.popcorn.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 
-import org.popcorn.domain.CatVO;
+
 import org.popcorn.domain.GoodsVO;
-import org.popcorn.domain.GoodsViewVO;
 import org.popcorn.service.AdminService;
-import org.popcorn.service.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +113,7 @@ public class AdminController {
         logger.info("get member list");
         //	logger.info(cri.toString());
 
-        List<GoodsViewVO> list = service.goodsList();
+        List<GoodsVO> list = service.goodsList();
 
         //	model.addAttribute("list", adminMemberService.listSearchCriteria(cri));
         model.addAttribute("list", list);
@@ -127,7 +124,7 @@ public class AdminController {
     public void getGoodsView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get goods view");
 
-        GoodsViewVO goods = service.goodsView(gdsId);
+        GoodsVO goods = service.goodsView(gdsId);
         model.addAttribute("goods", goods);
     }
 

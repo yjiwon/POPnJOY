@@ -12,8 +12,9 @@ import java.util.Date;
 public class GoodsViewVO {
 
 	private int gdsId;
+	private String userId;
 	private String gdsName;
-	private String catCode;
+	private String gdsCat;
 	private int gdsPrice;
 	private int gdsStock;
 	private String gdsDes;
