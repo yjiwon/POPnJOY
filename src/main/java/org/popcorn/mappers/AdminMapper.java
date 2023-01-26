@@ -1,10 +1,7 @@
 package org.popcorn.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.popcorn.domain.CatVO;
 import org.popcorn.domain.GoodsVO;
-import org.popcorn.domain.GoodsViewVO;
-import org.popcorn.domain.MemberVO;
 
 import java.util.List;
 

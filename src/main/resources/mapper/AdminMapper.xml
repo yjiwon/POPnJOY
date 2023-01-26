@@ -17,9 +17,9 @@
 
 	<!-- 상품 목록 -->
 
-	<select id="goodsList" resultType="com.popcorn.domain.GoodsViewVO">
+	<select id="goodsList" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, catCode, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		gdsId, gdsName, gdsCat, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 		gdsImg
 		from goods
 		order by gdsId
@@ -27,9 +27,9 @@
 
 
 	<!-- 상품 조회 + 카테고리 조인-->
-	<select id="goodsView" resultType="com.popcorn.domain.GoodsViewVO">
+	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, userId , gdsName, catCode, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
+		gdsId, userId , gdsName, gdsCat, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
 		gdsImg
 	    from goods
 		where gdsId = #{gdsId}

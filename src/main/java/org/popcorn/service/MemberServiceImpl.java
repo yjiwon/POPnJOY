@@ -1,6 +1,5 @@
 package org.popcorn.service;
 
-import org.popcorn.dao.MemberDAO;
 import org.popcorn.domain.MemberVO;
 
 import org.popcorn.mappers.MemberMapper;

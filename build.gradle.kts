@@ -29,6 +29,7 @@ dependencies {
 	implementation("javax.servlet:jstl")
 	implementation("org.apache.directory.studio:org.apache.commons.io:2.4")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("com.oracle.database.jdbc:ojdbc8:21.8.0.0")
 
 
 	compileOnly("org.projectlombok:lombok")
@@ -42,7 +43,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation ("org.json:json:20200518")
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-	implementation("com.fasterxml.jackson.core:jackson-databind:2.5.4")
+	// implementation("com.fasterxml.jackson.core:jackson-databind:2.5.4")
 
 
 

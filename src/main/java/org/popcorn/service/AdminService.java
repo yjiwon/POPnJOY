@@ -1,8 +1,6 @@
 package org.popcorn.service;
 
-import org.popcorn.domain.CatVO;
 import org.popcorn.domain.GoodsVO;
-import org.popcorn.domain.GoodsViewVO;
 
 import java.util.List;
 
