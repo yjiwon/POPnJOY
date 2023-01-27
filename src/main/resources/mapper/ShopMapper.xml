@@ -11,4 +11,32 @@
 		from goods
 		order by gdsId
 	</select>
+
+	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">
+		select
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		from goods
+		where gdsId = #{gdsId}
+	</select>
+
+	<!-- 카테고리 -->
+	<sql id="cat">
+		<if test="gdsCat != null" >
+			<if test="gdsCat == popcorn">
+				and catCode = popcorn
+			</if>
+			<if test="gdsCat == drink">
+				and catCode = drink
+			</if>
+			<if test="gdsCat == hotdog">
+				and catCode = hotdog
+			</if>
+			<if test="gdsCat == Snack">
+				and catCode = Snack
+			</if>
+
+		</if>
+
+	</sql>
+
 </mapper>

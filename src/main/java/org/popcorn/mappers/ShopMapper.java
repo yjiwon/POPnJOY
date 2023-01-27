@@ -12,5 +12,8 @@ public interface ShopMapper {
 
 	public List<GoodsVO> list() throws Exception;
 
+	public GoodsVO goodsView(int gdsId) throws Exception;
+
+
 
 }

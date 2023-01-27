@@ -17,4 +17,8 @@ public class ShopServiceImpl implements ShopService {
 	public List<GoodsVO> list() throws Exception {
 		return mapper.list();
 	}
-}
+
+		public GoodsVO goodsView(int gdsId) throws Exception {
+			return mapper.goodsView(gdsId);
+		}
+	}
