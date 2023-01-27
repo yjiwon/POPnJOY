@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" >
+<th:block th:fragment="asideFragment">
+
 <ul>
-    <li><a href="/admin/register">상품 등록</a></li>
-    <li><a href="/admin/list">상품 목록</a></li>
-    <li><a href="/admin/orderList">주문 목록</a></li>
+    <li><a th:href="/admin/register">상품 등록</a></li>
+    <li><a th:href="/admin/list">상품 목록</a></li>
+    <li><a th:href="/admin/orderList">주문 목록</a></li>
 </ul>
+
+</th:block>
 </html>

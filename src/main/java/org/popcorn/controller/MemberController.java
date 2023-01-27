@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping ("/pos/*")
+@RequestMapping ("/pos/")
 public class MemberController {
 
 
@@ -28,7 +28,8 @@ public class MemberController {
     private final MemberService service ;
     BCryptPasswordEncoder passEncoder;
 
-    @ResponseBody
+
+    @GetMapping("/signin")
     public void getSignin(MemberVO vo, HttpServletRequest request) throws Exception {
         logger.info("login......");
 
@@ -46,20 +47,21 @@ public class MemberController {
 
         if(login != null && passMatch) {
             session.setAttribute("member", login); // 아이디와 비밀번호 맞으면 멤버세션에 로그인 정보를 부여한다
-        } else {
+        } else { // 아이디가 존재하고 비번이 틀리다면
             session.setAttribute("member", null);
             rttr.addFlashAttribute("msg", false);
-            return "redirect:/pos/main";
+            return "redirect:/pos/signin";
         }
 
         return "redirect:/";
     }
 
     // 로그아웃
+    @GetMapping("/signout")
     public String signout(HttpSession session) throws Exception {
         logger.info("logout.....");
 
-        service.signout(session);
+        service.signout(session); //세션정보제거
 
         return "redirect:/";
     }

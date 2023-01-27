@@ -3,6 +3,7 @@ package org.popcorn.service;
 
 import org.popcorn.domain.GoodsVO;
 import org.popcorn.mappers.AdminMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	private AdminMapper mapper;
+	@Autowired
+	AdminMapper mapper;
 
 	@Override
 	public void register(GoodsVO vo) throws Exception {

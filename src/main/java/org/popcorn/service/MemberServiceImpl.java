@@ -3,6 +3,7 @@ package org.popcorn.service;
 import org.popcorn.domain.MemberVO;
 
 import org.popcorn.mappers.MemberMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpSession;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	private MemberMapper mapper;
+	@Autowired
+	MemberMapper mapper;
 
 	@Override
 	public MemberVO signin(MemberVO vo) throws Exception {

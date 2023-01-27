@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping ("/goods/*")
+@RequestMapping ("/goods/")
 public class ShopController {
 
     private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
