@@ -1,5 +1,6 @@
 package org.popcorn.service;
 
+import org.popcorn.domain.CartVO;
 import org.popcorn.domain.GoodsVO;
 import org.popcorn.mappers.ShopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,17 @@ public class ShopServiceImpl implements ShopService {
 	ShopMapper mapper;
 
 	@Override
-	public List<GoodsVO> list() throws Exception {
-		return mapper.list();
+	public List<GoodsVO> list(String gdsCat) throws Exception {
+		return mapper.list(gdsCat);
 	}
 
-		public GoodsVO goodsView(int gdsId) throws Exception {
+	@Override
+	public GoodsVO goodsView(int gdsId) throws Exception {
 			return mapper.goodsView(gdsId);
 		}
+	@Override
+	public void addCart(CartVO cart) throws Exception {
+		mapper.addCart(cart);
+
+	  }
 	}

@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class GoodsVO {
 
 	private int gdsId;
@@ -19,7 +17,7 @@ public class GoodsVO {
 	private int gdsStock;
 	private String gdsDes;
 	private String gdsImage;
-	private Date gdsDete;
+	private Date gdsDate;
 
 	public void gdsImage(String uploadFile) {
 	}

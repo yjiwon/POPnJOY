@@ -7,14 +7,14 @@
 
 	<select id="list" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate
 		from goods
-		order by gdsId
+		where gdsCat = #{gdsCat,jdbcType=VARCHAR}
 	</select>
 
 	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate
 		from goods
 		where gdsId = #{gdsId}
 	</select>
