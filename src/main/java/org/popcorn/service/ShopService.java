@@ -1,8 +1,6 @@
 package org.popcorn.service;
 
-import org.popcorn.domain.CartListVO;
-import org.popcorn.domain.CartVO;
-import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.*;
 
 import java.util.List;
 
@@ -11,16 +9,14 @@ public interface ShopService {
 
 	public GoodsVO goodsView(int gdsId) throws Exception;
 
-	public void addCart(CartVO cart) throws Exception;
-
 	// 카트 담기
 	public void addCart(CartListVO cart) throws Exception;
 
 	// 카트 리스트
-	public List<CartListVO> cartList(String Name) throws Exception;
+	public List<CartListVO> cartList(int cartNum) throws Exception;
 
 	// 카트 삭제
-	public void deleteCart(CartVO cart) throws Exception;
+	public void deleteCart(int gdsId) throws Exception;
 
 	// 주문 정보
 	public void orderInfo(OrderVO order) throws Exception;
@@ -29,7 +25,7 @@ public interface ShopService {
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception;
 
 	// 카트 비우기
-	public void cartAllDelete(String userId) throws Exception;
+	public void cartAllDelete(String orderId) throws Exception;
 
 	// 주문 목록
 	public List<OrderVO> orderList(OrderVO order) throws Exception;

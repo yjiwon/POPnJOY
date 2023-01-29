@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decoration = "pos/layout/pos_layout">
-
     <head>
         <meta charset="UTF-8">
 
@@ -98,7 +95,7 @@
                     <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
                     <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
 
-                    <script th:inline="javascript" >
+                    <script = "javascript" >
 					var formObj = $("form[role='form']");
 
 					$("#modify_Btn").click(function(){

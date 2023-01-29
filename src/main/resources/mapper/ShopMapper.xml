@@ -41,15 +41,15 @@
 
 	<!-- 카트 담기 -->
 	<insert id="addCart">
-		insert into tbl_cart (cartNum, name, gdsNum, cartStock)
-		values (tbl_cart_seq.nextval, #{name}, #{gdsNum}, #{cartStock})
+		insert into cart (cartNum, gdsId, cartStock)
+		values (cart_seq.nextval, #{gdsId}, #{cartStock})
 	</insert>
 
 	<!-- 카트 리스트 -->
 	<select id="cartList" resultType="com.popcorn.domain.CartListVO">
 		select
 		row_number() over(order by c.cartNum desc) as num,
-		c.cartNum, c.gdsNum, c.cartStock, name
+		c.cartNum, c.gdsId, c.cartStock, name
 		g.gdsName, g.gdsPrice,
 		from cart c
 		inner join goods g
@@ -61,26 +61,25 @@
 	<delete id="deleteCart">
 		delete cart
 		where cartNum = #{cartNum}
-		and name = #{name}
 	</delete>
 
 	<!-- 주문 정보 -->
 	<insert id="orderInfo">
-		insert into order(orderId, name, orderRec, orderPhone, amount)
-		values(#{orderId}, #{userId}, #{orderRec}, #{orderPhone}, #{amount})
+		insert into tbl_order(orderId, orderPhone, amount)
+		values(#{orderId}, #{orderPhone}, #{amount})
 	</insert>
 
 	<!-- 주문 상세 정보 -->
 	<insert id="orderInfo_Details">
-		insert into order_details(orderDetailsNum, orderId, gdsNum, cartStock)
-		select order_details_seq.nextval, #{orderId}, gdsNum, cartStock
+		insert into tbl_order_details(orderDetailsNum, orderId, gdsId, cartStock)
+		select order_details_seq.nextval, #{orderId}, gdsId, cartStock
 		from cart
 	</insert>
 
 	<!-- 카트 비우기 -->
 	<delete id="cartAllDelete">
 		delete cart
-		where name = #{name}
+		where cartNum = #{cartNum}
 	</delete>
 
 	<!-- 특정 유저의 주문 목록 -->
@@ -88,7 +87,7 @@
 		select
 		orderId, userId, orderRec,
 		orderPhone, amount, orderDate, delivery
-		from order
+		from  tbl_order
 		where name = #{name}
 	</select>
 

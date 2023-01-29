@@ -1,8 +1,6 @@
 package org.popcorn.service;
 
-import org.popcorn.domain.CartListVO;
-import org.popcorn.domain.CartVO;
-import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.*;
 import org.popcorn.mappers.ShopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,7 @@ public class ShopServiceImpl implements ShopService {
 	public GoodsVO goodsView(int gdsId) throws Exception {
 			return mapper.goodsView(gdsId);
 		}
+
 	// 카트 담기
 	@Override
 	public void addCart(CartListVO cart) throws Exception {
@@ -32,14 +31,14 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 리스트
 	@Override
-	public List<CartListVO> cartList(String name) throws Exception {
-		return mapper.cartList(name);
+	public List<CartListVO> cartList(int cartNum) throws Exception {
+		return mapper.cartList(cartNum);
 	}
 
 	// 카트 삭제
 	@Override
-	public void deleteCart(CartVO cart) throws Exception {
-		mapper.deleteCart(cart);
+	public void deleteCart(int gdsId) throws Exception {
+		mapper.deleteCart(gdsId);
 	}
 
 	// 주문 정보
@@ -56,8 +55,8 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 비우기 
 	@Override
-	public void cartAllDelete(String name) throws Exception {
-		mapper.cartAllDelete(name);
+	public void cartAllDelete(String orderId) throws Exception {
+		mapper.cartAllDelete(orderId);
 	}
 
 	// 주문 목록
@@ -65,7 +64,6 @@ public class ShopServiceImpl implements ShopService {
 	public List<OrderVO> orderList(OrderVO order) throws Exception {
 		return mapper.orderList(order);
 	}
-
-
 }
+
 
