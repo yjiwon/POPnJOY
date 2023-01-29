@@ -3,6 +3,7 @@ package org.popcorn.controller;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.popcorn.domain.CartListVO;
 import org.popcorn.domain.CartVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,20 +14,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping ("/goods/")
+@RequestMapping ("/goods/*")
 public class ShopController {
 
     private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
     private final ShopService service ;
 
     //view = list
-    @GetMapping("list2")
+    @GetMapping("/list2")
     public void getList(@RequestParam(required=false, name="c") String gdsCat,Model model) throws Exception {
         logger.info("get shop list...");
 
@@ -36,7 +39,7 @@ public class ShopController {
         model.addAttribute("list", list);
 
     }
-        @GetMapping("list2/view")
+        @GetMapping("/list2/view")
         public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
             logger.info("get shop view...");
 
@@ -49,12 +52,37 @@ public class ShopController {
         //카트담기
 
     @ResponseBody
-    @PostMapping("view/addCart")
-    public void addCart(CartVO cart, HttpSession session) throws Exception {
-        //  MemberVO member = (MemberVO)session.getAttribute("member");
-        //   cart.setUserId(member.getUserId());
+    @PostMapping("/list2/addCart")
+    public int addCart(CartVO cart, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        service.addCart(cart);
+        int result = 0;
+
+        cart = (CartVO) session.getAttribute("cart");
+
+        if( cart != null) {
+            cart.setGdsId(cart.getGdsId());
+            service.addCart(cart);
+            result = 1;
+        }
+
+        return result;
+
+
+        }
+
+    @RequestMapping(value = "/list2/cartList", method = RequestMethod.GET)
+    public void getCartList(HttpSession session, Model model) throws Exception {
+        logger.info("get cart list");
+
+        CartVO cart = (CartVO)session.getAttribute("cart");
+        String name = cart.getName();
+
+        List<CartListVO> cartList = service.cartList(name);
+
+        model.addAttribute("cartList", cartList);
+
+    }
+
 
     }
 
@@ -63,7 +91,7 @@ public class ShopController {
         //주문하기
 
 
-    }
+
 
 
 

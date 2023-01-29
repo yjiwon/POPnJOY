@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping ("/pos/")
+@RequestMapping ("/pos/*")
 public class MemberController {
 
 

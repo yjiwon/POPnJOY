@@ -60,7 +60,7 @@ License URL: https://creativecommons.org/licenses/by/4.0/
           <div class="row my-auto" id="order">
             <div class="col-md-8">
               <div class="contact-cont">
-                <h3>CONTACT Us</h3>
+                <h3> 장바구니!!! </h3>
                 <div class="heading-border-light"></div>
                 <p> as opposed to using Content here.</p>
               </div>
@@ -188,29 +188,34 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 
             <!-- 카트담기 -->
 
-  $(".btn btn-general btn-white").click(function(){
-   var gdsNum = $("#gdsNum").val();
-   var cartStock = $(".numBox").val();
+ $(".btn btn-general btn-white").click(function(){
+  var gdsNum = $("#gdsNum").val();
+  var cartStock = $(".numBox").val();
 
-   var data = {
-     gdsNum : gdsNum,
-     cartStock : cartStock
-     };
+  var data = {
+    gdsNum : gdsNum,
+    cartStock : cartStock
+    };
 
-   $.ajax({
-    url : "/shop/view/addCart",
-    type : "post",
-    data : data,
-    success : function(result){
+  $.ajax({
+   url : "/shop/view/addCart",
+   type : "post",
+   data : data,
+   success : function(result){
+
+    if(result == 1) {
      alert("카트 담기 성공");
      $(".numBox").val("1");
-    },
-    error : function(){
-     alert("카트 담기 실패");
+    } else {
+     alert("회원만 사용할 수 있습니다.")
+     $(".numBox").val("1");
     }
-   });
+   },
+   error : function(){
+    alert("카트 담기 실패");
+   }
   });
-
+ });
 
  </script>
 </body>

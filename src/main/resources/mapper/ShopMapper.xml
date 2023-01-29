@@ -39,4 +39,58 @@
 
 	</sql>
 
+	<!-- 카트 담기 -->
+	<insert id="addCart">
+		insert into tbl_cart (cartNum, name, gdsNum, cartStock)
+		values (tbl_cart_seq.nextval, #{name}, #{gdsNum}, #{cartStock})
+	</insert>
+
+	<!-- 카트 리스트 -->
+	<select id="cartList" resultType="com.popcorn.domain.CartListVO">
+		select
+		row_number() over(order by c.cartNum desc) as num,
+		c.cartNum, c.gdsNum, c.cartStock, name
+		g.gdsName, g.gdsPrice,
+		from cart c
+		inner join goods g
+		on c.gdsId = g.gdsId
+		where c.name = #{name}
+	</select>
+
+	<!-- 카트 삭제 -->
+	<delete id="deleteCart">
+		delete cart
+		where cartNum = #{cartNum}
+		and name = #{name}
+	</delete>
+
+	<!-- 주문 정보 -->
+	<insert id="orderInfo">
+		insert into order(orderId, name, orderRec, orderPhone, amount)
+		values(#{orderId}, #{userId}, #{orderRec}, #{orderPhone}, #{amount})
+	</insert>
+
+	<!-- 주문 상세 정보 -->
+	<insert id="orderInfo_Details">
+		insert into order_details(orderDetailsNum, orderId, gdsNum, cartStock)
+		select order_details_seq.nextval, #{orderId}, gdsNum, cartStock
+		from cart
+	</insert>
+
+	<!-- 카트 비우기 -->
+	<delete id="cartAllDelete">
+		delete cart
+		where name = #{name}
+	</delete>
+
+	<!-- 특정 유저의 주문 목록 -->
+	<select id="orderList" resultType="com.popcorn.domain.OrderVO">
+		select
+		orderId, userId, orderRec,
+		orderPhone, amount, orderDate, delivery
+		from order
+		where name = #{name}
+	</select>
+
+
 </mapper>

@@ -6,7 +6,6 @@ License URL: https://creativecommons.org/licenses/by/4.0/
 -->
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
