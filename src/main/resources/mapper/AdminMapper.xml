@@ -78,4 +78,40 @@
 	</sql>
 
 
+	<!-- 모든 유저의 주문 목록 -->
+	<select id="orderList" resultType="com.popcorn.domain.OrderVO">
+		select
+		orderId, orderPhone, amount, orderDate, , delivery
+		from tbl_order
+	</select>
+
+	<!-- 특정 주문 목록 -->
+	<select id="orderView" resultType="com.popcorn.domain.OrderListVO">
+		select
+		o.orderId,o.orderPhone, o.amount, o.orderDate, o.delivery,
+		d.orderDetailsNum, d.gdsId, d.cartStock,
+		g.gdsName, g.gdsPrice
+		from tbl_order o
+		inner join tbl_order_details d
+		on o.orderId = d.orderId
+		inner join goods g
+		on d.gdsId = g.gdsId
+		where o.orderId = #{orderId}
+	</select>
+
+	<!-- 배송 상태 -->
+	<update id="delivery">
+		update tbl_order
+		set delivery = #{delivery}
+		where orderId = #{orderId}
+	</update>
+
+
+	<!-- 상품 수량 조절 -->
+	<update id="changeStock">
+		update goods
+		set gdsStock = gdsStock - #{gdsStock}
+		where gdsId = #{gdsId}
+	</update>
+
 </mapper>

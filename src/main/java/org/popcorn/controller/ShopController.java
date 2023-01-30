@@ -11,6 +11,7 @@ import org.popcorn.service.ShopService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
@@ -102,11 +103,13 @@ public class ShopController {
     }
 
     @GetMapping("/cartList")
-    public void getCartList(int cartNum, Model model) throws Exception {
+    public void getCartList(int cartNum, RedirectAttributes rttr,  Model model) throws Exception {
         logger.info("get cart list");
 
         List<CartListVO> cartList = service.cartList(cartNum);  // CartListVO형태 변수 CartList에 상품 정보 저장
         model.addAttribute("cartList", cartList);
+
+        rttr.addFlashAttribute("msg", "SUCCESS");
     }
 
 

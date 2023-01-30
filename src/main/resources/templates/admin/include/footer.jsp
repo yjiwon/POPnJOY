@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-</head>
-<th:block th:fragment="footerFragment">
-    <div>
-    <h2>admin footer</h2>
-    </div>
-</th:block>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<h1 class="title">
+	<a href="/admin/index">관리자 페이지</a>
+</h1>

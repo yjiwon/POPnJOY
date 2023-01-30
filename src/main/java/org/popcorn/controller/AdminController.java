@@ -184,6 +184,28 @@ public class AdminController {
         model.addAttribute("orderView", orderView);
     }
 
+    // 주문 상세 목록 - 상태 변경
+    @PostMapping("/orderView")
+    public String delivery(OrderVO order) throws Exception {
+        logger.info("post order view");
+
+        service.delivery(order);
+
+        // 새로운 Service → DAO → Mapper 를 사용하지 않고, 기존에 있던 Service를 사용
+        List<OrderListVO> orderView =service.orderView(order);
+
+        // 생성자 사용
+        GoodsVO goods = new GoodsVO();
+
+        for(OrderListVO i : orderView) {
+            goods.setGdsId(i.getGdsId());
+            goods.setGdsStock(i.getCartStock());
+            service.changeStock(goods);
+        }
+
+        return "redirect:/admin/shop/orderView?n=" + order.getOrderId();
+    }
+
 
 }
 

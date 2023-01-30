@@ -35,6 +35,9 @@ public interface AdminMapper {
 	// 상품 수량 조절
 	public void changeStock(GoodsVO goods) throws Exception;
 
+	// 수령 상태
+	public void delivery(OrderVO order) throws Exception;
+
 
 
 

@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decoration = "pos/layout/pos_layout">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-    <head>
-        <meta charset="UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-        <style>
+<html>
+<head>
+	<title>Admin GoodsList Page</title>
+
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+
+<link rel="stylesheet" href="/resources/static/bootstrap/css">
+<script src="/resources/static/bootstrap/js"></script>
+
+<style>
 	body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
 	ul { padding:0; margin:0; list-style:none;  }
 
@@ -32,8 +37,7 @@
 	footer#footer ul li { display:inline-block; margin-right:10px; }
 </style>
 
-
-        <style>
+<style>
 #container_box table { width:900px; }
 #container_box table th { font-size:20px; font-weight:bold;
 							text-align:center; padding:10px; border-bottom:2px solid #666; }
@@ -42,24 +46,45 @@
 #container_box table img { width:150px; height:auto; }
 </style>
 
-    </head>
-
-    <body>
-    <th:block layout:fragment="content">
-
-   <nav id="nav" >
-<div th:replace="~{/fragments/main}" ></div>
-   </nav>
 
 
-        <section id="container">
-        <aside>
-            <div th:replace="~{/fragments/aside}" ></div>
-        </aside>
-        </section>
+
+<style>
+/*
+#container_box table { width:900px; }
+#container_box table th { font-size:20px; font-weight:bold;
+							text-align:center; padding:10px; border-bottom:2px solid #666; }
+#container_box table tr:hover { background:#eee; }
+#container_box table td { padding:10px; text-align:center; }
+#container_box table img { width:150px; height:auto; }
+*/
+	div#container_box ul li { border:5px solid #eee; padding:10px 20px; margin-bottom:20px; }
+	div#container_box .orderList span { font-size:20px; font-weight:bold; display:inline-block; width:90px; margin-right:10px; }
+</style>
+
+
+</head>
+<body>
+<div id="root">
+	<header id="header">
+		<div id="header_box">
+			<%@ include file="../include/header.jsp" %>
+		</div>
+	</header>
+
+	<nav id="nav">
+		<div id="nav_box">
+			<%@ include file="../include/nav.jsp" %>
+		</div>
+	</nav>
+
+	<section id="container">
+		<aside>
+			<%@ include file="../include/aside.jsp" %>
+		</aside>
+
 
         <div id="container_box">
-
             <table>
                 <thead>
                 <tr>
@@ -72,27 +97,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <th:forEach items="${list}" var="list">
+                <c:forEach items="${list}" var="list">
                     <tr>
-                        <td> <a th:href="@{/admin/view(gdsId=[[${list.gdsId}]]>">
-                            [[${list.gdsId}]]
-                        </a>
-                           </td>
-                        <td>[[${list.gdsName}]]</td>
-                        <td>[[${list.gdsCat}]]</td>
-                        <td>[[${#temporals.format(list.gdsPrice, '###,###,###')}]]</td>
-                        <td>[[${list.gdsStock}]]</td>
-                        <td>[[${#temporals.format(list.gdsDate, 'yyyy-MM-dd')}]]</td>
+                        <td> <a href="/admin/goods/view?n=${list.gdsId}"> ${list.gdsId} </a>  </td>
+                        <td> ${list.gdsName} </td>
+                        <td> ${list.gdsCat} </td>
+                        <td> <fmt:formatNumber value="${list.gdsPrice}"  pattern="###,###,###"/> </td>
+                        <td> ${list.gdsStock} </td>
+                        <td> <fmt:formatDate value="${list.gdsDate}" pattern="yyyy-MM-dd" /> </td>
                     </tr>
                 </th:forEach>
                 </tbody>
             </table>
-
-
-
             </div>
-
-
-    </th:block>
+         </section>
+	<footer id="footer">
+		<div id="footer_box">
+			<%@ include file="../include/footer.jsp" %>
+		</div>
+	</footer>
+      </div>
     </body>
 </html>

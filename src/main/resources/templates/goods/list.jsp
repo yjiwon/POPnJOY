@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/aside.jsp"%>
 
 <!--
@@ -82,9 +84,20 @@ License URL: https://creativecommons.org/licenses/by/4.0/
                                           <li>가격:
                                               <strong value="${list.gdsPrice}"> 원 </strong>
                                           </li>
+
+                                          <c:if test="${view.gdsStock != 0}">
+
                                           <li>구매수량:
-                                              <strong value="${list.gdsStock}"> 개 </strong>
+                                          <button type="button" class="plus">+</button>
+                                              <strong type="number" class="numBox" min="1" max="${list.gdsStock}" value="1" readonly="readonly"/>
+                                              <button type="button" class="minus">-</button>
+                                            <input type="hidden" value="${list.gdsStock}" class="gdsStock_hidden" />
+	                                        <c:if test="${list.gdsStock == 0}">
+						                        	<p>품절 상품 입니다.</p>
+						                    </c:if>
                                           </li>
+
+                                          <script src="/resources/js/user/shop/stockBtn.js"></script>
                                       </ul>
                                       <button class="btn btn-general btn-white" type="button" data-dismiss="modal">
                                           <i class="fa fa-times"></i> 카트담기

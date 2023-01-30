@@ -13,5 +13,13 @@ public class OrderListVO {
 	private String orderPhone;
 	private int amount;
 	private Date orderDate;
+	private String delivery;
+
+	private int orderDetailsNum;
+	private int gdsId;
+	private int cartStock;
+
+	private String gdsName;
+	private int gdsPrice;
 
 }

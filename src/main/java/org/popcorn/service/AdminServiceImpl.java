@@ -2,6 +2,7 @@ package org.popcorn.service;
 
 
 import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.OrderListVO;
 import org.popcorn.domain.OrderVO;
 import org.popcorn.mappers.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void changeStock(GoodsVO goods) throws Exception {
 		mapper.changeStock(goods);
+	}
+
+	// 수령 상태
+	@Override
+	public void delivery(OrderVO order) throws Exception {
+		mapper.delivery(order);
 	}
 
 	     }

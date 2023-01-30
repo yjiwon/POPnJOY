@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<th:block th:fragment="nav">
-
-    <ul th:if="${member != null}">
-        <li>
-            <a href="/">일반 화면</a>
-        </li>
-        <li>
-            <a href="/member/signout">로그아웃</a>
-        </li>
-    </ul>
-</th:block>
-</html>
+<ul>
+<c:if test="${member != null}">
+	<li>
+		<a href="/">...</a>
+	</li>
+	<li>
+		<a href="/member/signout">로그아웃</a>
+	</li>
+</c:if>
+</ul>
