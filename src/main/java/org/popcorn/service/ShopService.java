@@ -5,7 +5,7 @@ import org.popcorn.domain.*;
 import java.util.List;
 
 public interface ShopService {
-	public List<GoodsVO> list(String gdsCat) throws Exception;
+	public List<GoodsVO> list() throws Exception;
 
 	public GoodsVO goodsView(int gdsId) throws Exception;
 
@@ -29,5 +29,8 @@ public interface ShopService {
 
 	// 주문 목록
 	public List<OrderVO> orderList(OrderVO order) throws Exception;
+
+	// 특정 주문 목록
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 
 }

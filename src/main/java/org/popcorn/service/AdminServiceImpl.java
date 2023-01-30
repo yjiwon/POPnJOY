@@ -2,6 +2,7 @@ package org.popcorn.service;
 
 
 import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.OrderVO;
 import org.popcorn.mappers.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,24 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void goodsDelete(int gdsId) throws Exception {
 		mapper.goodsDelete(gdsId);
+	}
+
+	// 주문 목록
+	@Override
+	public List<OrderVO> orderList() throws Exception {
+		return mapper.orderList();
+	}
+
+	// 특정 주문
+	@Override
+	public List<OrderListVO> orderView(OrderVO order) throws Exception {
+		return mapper.orderView(order);
+	}
+
+	// 상품 수량 조절
+	@Override
+	public void changeStock(GoodsVO goods) throws Exception {
+		mapper.changeStock(goods);
 	}
 
 	     }

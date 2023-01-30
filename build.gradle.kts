@@ -30,7 +30,7 @@ dependencies {
 	implementation("org.apache.directory.studio:org.apache.commons.io:2.4")
 
 	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
-	implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE")
+	// implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE")
 	implementation("com.oracle.database.jdbc:ojdbc8:21.8.0.0")
 
 

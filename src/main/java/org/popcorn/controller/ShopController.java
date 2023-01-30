@@ -12,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -29,23 +28,22 @@ public class ShopController {
     private final ShopService service;
 
     //view = list
-    @GetMapping("/list2")
+    @GetMapping("/list")
     public void getList(@RequestParam(required = false, name = "c") String gdsCat, Model model) throws Exception {
         logger.info("get shop list...");
 
-        List<GoodsVO> list = null;
-        list = service.list(gdsCat);
+        List<GoodsVO> list = service.list(); // GoodsVO형태의 List형 변수 list 선언
 
-        model.addAttribute("list", list);
+        model.addAttribute("list", list); // 변수 list의 값을 list 세션에 부여
 
     }
 
-    @GetMapping("/list2/view")
+    @GetMapping("/list/view")
     public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get shop view...");
 
         GoodsVO view = service.goodsView(gdsId);
-        //  model.addAttribute("view", view);
+        model.addAttribute("view", view);
 
     }
 
@@ -85,7 +83,7 @@ public class ShopController {
     //카트담기
 
     @ResponseBody
-    @PostMapping("/list2/addCart")
+    @PostMapping("/list/addCart")
     public int addCart(CartListVO cart, HttpSession session) throws Exception {
 
         int result = 0; //정상 작동 여부를 확인하기 위한 변수
@@ -107,13 +105,13 @@ public class ShopController {
     public void getCartList(int cartNum, Model model) throws Exception {
         logger.info("get cart list");
 
-        List<CartListVO> cartList = service.cartList(cartNum);
-
+        List<CartListVO> cartList = service.cartList(cartNum);  // CartListVO형태 변수 CartList에 상품 정보 저장
+        model.addAttribute("cartList", cartList);
     }
 
 
     @PostMapping("/deleteCart")
-    public String deleteCart(@RequestParam(value = "n") int gdsId) throws Exception {
+    public String PostDeleteCart(@RequestParam(value = "n") int gdsId) throws Exception {
         logger.info("delete cart");
 
         service.deleteCart(gdsId);
@@ -143,7 +141,7 @@ public class ShopController {
         String orderId = ymd + "_" + subNum;  // [연월일]_[랜덤숫자] 로 구성된 문자
 
         order.setOrderId(orderId);
-       //  order.setOrderPhone(orderPhone);
+      //  order.setOrderPhone(orderPhone);
 
         service.orderInfo(order);
 
@@ -158,18 +156,33 @@ public class ShopController {
         return "redirect:/shop/orderList";
     }
 
+    // 주문 목록
+    @GetMapping("/orderList")
+    public void getOrderList(HttpSession session, OrderVO order, Model model) throws Exception {
+        logger.info("get order list");
+
+
+        List<OrderVO> orderList = service.orderList(order);
+
+        model.addAttribute("orderList", orderList);
+    }
+
+    // 주문 상세 목록
+    @GetMapping("/orderView")
+    public void getOrderList(HttpSession session,
+                             @RequestParam("n") String orderId,
+                             OrderVO order, Model model) throws Exception {
+        logger.info("get order view");
+
+
+        order.setOrderId(orderId);
+
+        List<OrderListVO> orderView = service.orderView(order);
+
+        model.addAttribute("orderView", orderView);
+    }
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -14,14 +14,14 @@ public class ShopServiceImpl implements ShopService {
 	ShopMapper mapper;
 
 	@Override
-	public List<GoodsVO> list(String gdsCat) throws Exception {
-		return mapper.list(gdsCat);
+	public List<GoodsVO> list() throws Exception {
+		return mapper.list();
 	}
 
 	@Override
 	public GoodsVO goodsView(int gdsId) throws Exception {
-			return mapper.goodsView(gdsId);
-		}
+		return mapper.goodsView(gdsId);
+	}
 
 	// 카트 담기
 	@Override
@@ -64,6 +64,13 @@ public class ShopServiceImpl implements ShopService {
 	public List<OrderVO> orderList(OrderVO order) throws Exception {
 		return mapper.orderList(order);
 	}
-}
+
+		// 특정 주문
+		@Override
+		public List<OrderListVO> orderView (OrderVO order) throws Exception {
+			return mapper.orderView(order);
+		}
+	}
+
 
 

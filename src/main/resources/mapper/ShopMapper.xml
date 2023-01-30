@@ -79,16 +79,16 @@
 	<!-- 카트 비우기 -->
 	<delete id="cartAllDelete">
 		delete cart
-		where cartNum = #{cartNum}
+		where cartNum = #{orderId}
 	</delete>
 
 	<!-- 특정 유저의 주문 목록 -->
 	<select id="orderList" resultType="com.popcorn.domain.OrderVO">
 		select
-		orderId, userId, orderRec,
-		orderPhone, amount, orderDate, delivery
+		orderId,
+		orderPhone, amount, orderDate
 		from  tbl_order
-		where name = #{name}
+		where name = #{orderId}
 	</select>
 
 

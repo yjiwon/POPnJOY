@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 
 import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.OrderListVO;
+import org.popcorn.domain.OrderVO;
 import org.popcorn.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,6 +160,28 @@ public class AdminController {
         logger.info("post goods delete");
         service.goodsDelete(gdsId);
         return "redirect:/admin/index";
+    }
+
+    // 주문 목록
+    @GetMapping("/orderList")
+    public void getOrderList(Model model) throws Exception {
+        logger.info("get order list");
+
+        List<OrderVO> orderList = service.orderList();
+
+        model.addAttribute("orderList", orderList);
+    }
+
+    // 주문 상세 목록
+    @GetMapping("/orderView")
+    public void getOrderList(@RequestParam("n") String orderId,
+                             OrderVO order, Model model) throws Exception {
+        logger.info("get order view");
+
+        order.setOrderId(orderId);
+        List<OrderListVO> orderView = service.orderView(order);
+
+        model.addAttribute("orderView", orderView);
     }
 
 

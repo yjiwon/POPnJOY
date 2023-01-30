@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface ShopMapper {
 
-	public List<GoodsVO> list(String gdsCat) throws Exception;
+	public List<GoodsVO> list() throws Exception;
 
 	public GoodsVO goodsView(int gdsId) throws Exception;
 
@@ -34,6 +34,9 @@ public interface ShopMapper {
 
 	// 주문 목록
 	public List<OrderVO> orderList(OrderVO order) throws Exception;
+
+	// 특정 주문 목록
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 
 
 }

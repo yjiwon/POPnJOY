@@ -2,6 +2,8 @@ package org.popcorn.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.popcorn.domain.GoodsVO;
+import org.popcorn.domain.OrderListVO;
+import org.popcorn.domain.OrderVO;
 
 import java.util.List;
 
@@ -23,6 +25,16 @@ public interface AdminMapper {
 
 	// 상품 삭제
 	public void goodsDelete(int gdsId) throws Exception;
+
+	// 주문 목록
+	public List<OrderVO> orderList() throws Exception;
+
+	// 특정 주문 목록
+	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+
+	// 상품 수량 조절
+	public void changeStock(GoodsVO goods) throws Exception;
+
 
 
 
