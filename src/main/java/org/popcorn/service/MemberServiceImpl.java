@@ -2,7 +2,7 @@ package org.popcorn.service;
 
 import org.popcorn.domain.MemberVO;
 
-import org.popcorn.mappers.MemberMapper;
+import org.popcorn.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

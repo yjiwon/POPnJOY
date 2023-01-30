@@ -5,12 +5,13 @@
 
 <html>
 <head>
-	<title>kubg Admin</title>
+	<title>Admin OrderView Page</title>
 
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 
-<link rel="stylesheet" href="/resources/static/bootstrap/css">
-<script src="/resources/static/bootstrap/js"></script>
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap-theme.min.css">
+<script src="/resources/bootstrap/bootstrap.min.js"></script>
 
 <style>
 	body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }
@@ -69,19 +70,19 @@
 <div id="root">
 	<header id="header">
 		<div id="header_box">
-			<%@ include file="../include/header.jsp" %>
+			<%@ include file="include/header.jsp" %>
 		</div>
 	</header>
 
 	<nav id="nav">
 		<div id="nav_box">
-			<%@ include file="../include/nav.jsp" %>
+			<%@ include file="include/nav.jsp" %>
 		</div>
 	</nav>
 
 	<section id="container">
 		<aside>
-			<%@ include file="../include/aside.jsp" %>
+			<%@ include file="include/aside.jsp" %>
 		</aside>
 		<div id="container_box">
 
@@ -150,7 +151,7 @@
 
 	<footer id="footer">
 		<div id="footer_box">
-			<%@ include file="../include/footer.jsp" %>
+			<%@ include file="include/footer.jsp" %>
 		</div>
 	</footer>
 

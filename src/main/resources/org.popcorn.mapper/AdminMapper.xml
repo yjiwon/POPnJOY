@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.popcorn.mappers.MemberMapper">
+<mapper namespace="org.popcorn.mapper.AdminMapper">
 
 	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어 
 		있습니다. -->
@@ -11,7 +11,7 @@
 	<insert id="register">
 		insert into goods (gdsId,userId, gdsName,gdsCat , gdsPrice, gdsStock, gdsDes,
 		gdsImg, gdsDate)
-		values (goods_seq.nextval, #{gdsName}, #{gdsCat}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+		values (goods_seq.nextval, #{gdsName},#{userId}, #{gdsCat}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
 		#{gdsImg}, sysdate)
 	</insert>
 
@@ -79,14 +79,14 @@
 
 
 	<!-- 모든 유저의 주문 목록 -->
-	<select id="orderList" resultType="com.popcorn.domain.OrderVO">
+	<select id="orderList" resultType="org.popcorn.domain.OrderVO">
 		select
 		orderId, orderPhone, amount, orderDate, , delivery
 		from tbl_order
 	</select>
 
 	<!-- 특정 주문 목록 -->
-	<select id="orderView" resultType="com.popcorn.domain.OrderListVO">
+	<select id="orderView" resultType="org.popcorn.domain.OrderListVO">
 		select
 		o.orderId,o.orderPhone, o.amount, o.orderDate, o.delivery,
 		d.orderDetailsNum, d.gdsId, d.cartStock,

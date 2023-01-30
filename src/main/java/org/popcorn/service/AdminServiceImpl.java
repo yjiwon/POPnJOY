@@ -4,7 +4,7 @@ package org.popcorn.service;
 import org.popcorn.domain.GoodsVO;
 import org.popcorn.domain.OrderListVO;
 import org.popcorn.domain.OrderVO;
-import org.popcorn.mappers.AdminMapper;
+import org.popcorn.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

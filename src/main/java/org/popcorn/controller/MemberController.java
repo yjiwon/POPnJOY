@@ -43,7 +43,11 @@ public class MemberController {
         MemberVO login = service.signin(vo);
         HttpSession session = req.getSession();
 
+        System.out.println("login : " + login);
+
         boolean passMatch = passEncoder.matches(vo.getUserPw(), login.getUserPw());  // db의 비밀번호와 입력된 비번 비교함
+        System.out.println("passMatch : " + passMatch);
+
 
         if(login != null && passMatch) {
             session.setAttribute("member", login); // 아이디와 비밀번호 맞으면 멤버세션에 로그인 정보를 부여한다

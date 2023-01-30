@@ -5,8 +5,9 @@
 
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 
-<link rel="stylesheet" href="/resources/static/bootstrap/css">
-<script src="/resources/static/bootstrap/js"></script>
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap-theme.min.css">
+<script src="/resources/bootstrap/bootstrap.min.js"></script>
 
 <style>
 	body { font-family:'맑은 고딕', verdana; padding:0; margin:0; }

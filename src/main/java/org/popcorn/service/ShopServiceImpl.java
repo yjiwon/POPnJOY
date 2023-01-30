@@ -1,7 +1,7 @@
 package org.popcorn.service;
 
 import org.popcorn.domain.*;
-import org.popcorn.mappers.ShopMapper;
+import org.popcorn.mapper.ShopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

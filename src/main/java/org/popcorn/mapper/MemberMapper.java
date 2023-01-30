@@ -1,4 +1,4 @@
-package org.popcorn.mappers;
+package org.popcorn.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.popcorn.domain.MemberVO;
