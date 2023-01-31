@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ public class MemberController {
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     private final MemberService service ;
-    BCryptPasswordEncoder passEncoder;
+    // BCryptPasswordEncoder passEncoder;
 
 
     @GetMapping("/signin")
@@ -37,24 +37,17 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public String postSignin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
-        logger.info("post signin");
+    public String login(MemberVO vo, HttpServletRequest req) throws Exception {
+        logger.info("post login");
 
-        MemberVO login = service.signin(vo);
         HttpSession session = req.getSession();
 
-        System.out.println("login : " + login);
+        MemberVO login = service.signin(vo);
 
-        boolean passMatch = passEncoder.matches(vo.getUserPw(), login.getUserPw());  // db의 비밀번호와 입력된 비번 비교함
-        System.out.println("passMatch : " + passMatch);
-
-
-        if(login != null && passMatch) {
-            session.setAttribute("member", login); // 아이디와 비밀번호 맞으면 멤버세션에 로그인 정보를 부여한다
-        } else { // 아이디가 존재하고 비번이 틀리다면
+        if(login == null) {
             session.setAttribute("member", null);
-            rttr.addFlashAttribute("msg", false);
-            return "redirect:/pos/signin";
+        } else {
+            session.setAttribute("member", login);
         }
 
         return "redirect:/";

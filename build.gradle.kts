@@ -42,7 +42,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	runtimeOnly ("com.oracle.database.jdbc:ojdbc8")
 
-	implementation("org.springframework.boot:spring-boot-starter-security")
+	// implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation ("org.json:json:20200518")
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	// implementation("com.fasterxml.jackson.core:jackson-databind:2.5.4")

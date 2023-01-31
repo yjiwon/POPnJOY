@@ -5,16 +5,16 @@
 
 <mapper namespace="org.popcorn.mapper.ShopMapper">
 
-	<select id="goodsList" resultType="org.popcorn.domain.GoodsVO">
+	<select id="list" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage
 		from goods
-		where gdsCat = #{gdsCat,jdbcType=VARCHAR}
+		where gdsId = #{gdsId}
 	</select>
 
 	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage
 		from goods
 		where gdsId = #{gdsId}
 	</select>
@@ -23,16 +23,16 @@
 	<sql id="cat">
 		<if test="gdsCat != null" >
 			<if test="gdsCat == popcorn">
-				and catCode = popcorn
+				and gdsCat = popcorn
 			</if>
 			<if test="gdsCat == drink">
-				and catCode = drink
+				and gdsCat = drink
 			</if>
 			<if test="gdsCat == hotdog">
-				and catCode = hotdog
+				and gdsCat = hotdog
 			</if>
-			<if test="gdsCat == Snack">
-				and catCode = Snack
+			<if test="gdsCat == snack">
+				and gdsCat = snack
 			</if>
 
 		</if>

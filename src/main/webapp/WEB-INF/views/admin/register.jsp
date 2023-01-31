@@ -69,7 +69,7 @@ textarea#gdsDes { width:400px; height:180px; }
 			<h2>상품 등록</h2>
 
 			<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
-                <input type="hidden" name="userId" th:value="${goods.userId}">
+
 
                 <div class="inputArea">
                     <label>상품명</label>
@@ -77,7 +77,7 @@ textarea#gdsDes { width:400px; height:180px; }
                         <option value="popcorn">팝콘</option>
                         <option value="drink">음료</option>
                         <option value="hotdog">핫도그</option>
-                        <option value="squid">오징어</option>
+                        <option value="snack">스낵</option>
                     </th:select>
                 </div>
 
@@ -103,7 +103,7 @@ textarea#gdsDes { width:400px; height:180px; }
 
                 <div class="inputArea">
                     <tr>
-                        <td><input type="file" name="attachFile" style="font-size:1.0em;"></td>
+                        <td><input type="file" id="gdsImage" name="attachFile" style="font-size:1.0em;"></td>
                     </tr>
                     </div>
 

@@ -39,16 +39,16 @@
           <a class="nav-link js-scroll-trigger"  href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#/goods/list2?c=popcorn">팝콘</a>
+          <a class="nav-link js-scroll-trigger" href="#popcorn">팝콘</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#/goods/list2?c=drink">음료</a>
+          <a class="nav-link js-scroll-trigger" href="#drink">음료</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#/goods/list2?c=hotdog">핫도그</a>
+          <a class="nav-link js-scroll-trigger" href="#hotdog">핫도그</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#/goods/list2?c=snack">스낵</a>
+          <a class="nav-link js-scroll-trigger" href="#snack">스낵</a>
         </li>
       </ul>
     </div>

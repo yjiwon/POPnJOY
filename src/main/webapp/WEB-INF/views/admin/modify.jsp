@@ -86,7 +86,7 @@ textarea#gdsDes { width:400px; height:180px; }
                         <option value="popcorn">팝콘</option>
                         <option value="drink">음료</option>
                         <option value="hotdog">핫도그</option>
-                        <option value="squid">오징어</option>
+                        <option value="snack">스낵</option>
                     <select>
 
                 <div class="inputArea">

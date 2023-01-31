@@ -99,14 +99,14 @@
                 <tbody>
                 <c:forEach items="${list}" var="list">
                     <tr>
-                        <td> <a href="/admin/goods/view?n=${list.gdsId}"> ${list.gdsId} </a>  </td>
+                        <td> <a href="/admin/view?n=${list.gdsId}"> ${list.gdsId} </a>  </td>
                         <td> ${list.gdsName} </td>
                         <td> ${list.gdsCat} </td>
                         <td> <fmt:formatNumber value="${list.gdsPrice}"  pattern="###,###,###"/> </td>
                         <td> ${list.gdsStock} </td>
                         <td> <fmt:formatDate value="${list.gdsDate}" pattern="yyyy-MM-dd" /> </td>
                     </tr>
-                </th:forEach>
+                </c:forEach>
                 </tbody>
             </table>
             </div>

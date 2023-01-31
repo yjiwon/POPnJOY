@@ -3,7 +3,7 @@ package org.popcorn.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
+import org.popcorn.util.MediaUtils;
 import org.popcorn.domain.GoodsVO;
 import org.popcorn.domain.OrderListVO;
 import org.popcorn.domain.OrderVO;
@@ -54,11 +54,12 @@ public class AdminController {
     public String POSTGoodsRegister(
             GoodsVO GoodsVO, @RequestParam(name = "attachFile", required = false) MultipartFile file,
             HttpServletRequest request, RedirectAttributes rttr) throws Exception {
-        logger.info("write post ...........");
+        logger.info("register post ...........");
         logger.info(GoodsVO.toString());
 
+/*
         HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
+        String userId = (String)session.getAttribute("userId"); */
 
         if (!file.getOriginalFilename().equals("") && checkFile(file))
         {
@@ -66,12 +67,13 @@ public class AdminController {
         } else {
             GoodsVO.setGdsImage("");
         }
-
+/*
         if(userId!=null) {
             GoodsVO.setUserId(userId);
         }else {
             GoodsVO.setUserId("userId1");
-        }
+        }*/
+
         service.register(GoodsVO);
 
         rttr.addFlashAttribute("msg", "SUCCESS");
@@ -202,6 +204,7 @@ public class AdminController {
             goods.setGdsStock(i.getCartStock());
             service.changeStock(goods);
         }
+
 
         return "redirect:/admin/shop/orderView?n=" + order.getOrderId();
     }

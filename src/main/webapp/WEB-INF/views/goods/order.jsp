@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/aside.jsp"%>
+<%@ include file="include/aside.jsp"%>
 
 
   <section class="resume-section p-3 p-lg-5 d-flex flex-column">

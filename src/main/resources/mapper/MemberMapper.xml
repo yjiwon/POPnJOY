@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.popcorn.mapper.MemberMapper">
 
-	<!-- id 속성은 DAO 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어 
+	<!-- vo 의 메소드와 같아야 한다. 여기의 boardVO 는 mybatis-confg.xml 에 Alias 되어
 		있습니다. -->
 
 	<select id="signin" resultType="org.popcorn.domain.MemberVO">
-		select userId, userPass, userName, verify
+		select userId, userPw
 		from
-		member where userId = #{userId}
+		member where userId = #{userId} and userPw = #{userPw}
 	</select>
 
 </mapper>

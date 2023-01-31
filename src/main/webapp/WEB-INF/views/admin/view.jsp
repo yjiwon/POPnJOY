@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
@@ -102,10 +101,11 @@ textarea#gdsDes { width:400px; height:180px; }
                     <label for="gdsDes">상품소개</label>
                   <div class="gdsDes">${goods.gdsDes}</div>
 
-                  <c:if test="${list.cFileName != null}">
-                  <img alt="" src="/service/displayFile?fileName=${list.cFileName}"></td>
-                  </c:if>
-
+                  <div class="inputArea">
+                    <label for="gdsImage">상품사진</label>
+                     	<c:if test="${goods.gdsImage != null}">
+                    <img alt="" src="displayFile?fileName=${goods.gdsImage}"></td>
+                      </c:if>
                   </div>
 
 
@@ -113,7 +113,7 @@ textarea#gdsDes { width:400px; height:180px; }
                     <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
                     <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
 
-                    <script = "javascript" >
+                    <script>
 					var formObj = $("form[role='form']");
 
 					$("#modify_Btn").click(function(){

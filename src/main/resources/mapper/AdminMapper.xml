@@ -9,18 +9,18 @@
 
 	<!-- 상품 등록 -->
 	<insert id="register">
-		insert into goods (gdsId,userId, gdsName,gdsCat , gdsPrice, gdsStock, gdsDes,
-		gdsImg, gdsDate)
-		values (goods_seq.nextval, #{gdsName},#{userId}, #{gdsCat}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
-		#{gdsImg}, sysdate)
+		insert into goods (gdsId, gdsName,gdsCat , gdsPrice, gdsStock, gdsDes,
+		gdsImage, gdsDate)
+		values (goods_seq.nextval, #{gdsName}, #{gdsCat}, #{gdsPrice}, #{gdsStock}, #{gdsDes},
+		#{gdsImage}, sysdate)
 	</insert>
 
 	<!-- 상품 목록 -->
 
 	<select id="goodsList" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-		gdsImg
+		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate,
+		gdsImage
 		from goods
 		order by gdsId
 	</select>
@@ -29,8 +29,8 @@
 	<!-- 상품 조회 + 카테고리 조인-->
 	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, userId , gdsName, gdsCat, catCodeRef, catName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-		gdsImg
+		gdsId,  gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage, gdsDate,
+		gdsImage
 	    from goods
 		where gdsId = #{gdsId}
 	</select>
@@ -45,7 +45,7 @@
 		gdsStock = #{gdsStock},
 		gdsDes = #{gdsDes},
 
-		gdsImg = #{gdsImg},
+		gdsImage = #{gdsImage},
 
 		where gdsId = ${gdsId}
 	</update>
@@ -61,16 +61,16 @@
 	<sql id="cat">
 		<if test="gdsCat != null" >
 			<if test="gdsCat == popcorn">
-					and catCode = popcorn
+					and gdsCat = popcorn
 			</if>
 				<if test="gdsCat == drink">
-					and catCode = drink
+					and gdsCat = drink
 				</if>
 					<if test="gdsCat == hotdog">
-						and catCode = hotdog
+						and gdsCat = hotdog
 					</if>
-						<if test="gdsCat == Squid">
-							and catCode = Squid
+						<if test="gdsCat == snack">
+							and gdsCat = snack
 						</if>
 
 			</if>
@@ -81,7 +81,7 @@
 	<!-- 모든 유저의 주문 목록 -->
 	<select id="orderList" resultType="org.popcorn.domain.OrderVO">
 		select
-		orderId, orderPhone, amount, orderDate, , delivery
+		orderId, orderPhone, amount, orderDate, delivery
 		from tbl_order
 	</select>
 
