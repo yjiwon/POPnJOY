@@ -3,6 +3,7 @@ package org.popcorn.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.io.IOUtils;
 import org.popcorn.util.MediaUtils;
 import org.popcorn.domain.GoodsVO;
 import org.popcorn.domain.OrderListVO;
@@ -11,6 +12,10 @@ import org.popcorn.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -22,6 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -81,7 +88,95 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
-//
+
+
+    @ResponseBody
+    @GetMapping("/displayFile")
+    public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+
+        logger.info("FILE NAME: " + fileName);
+
+        try {
+
+            String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+            MediaType mType = MediaUtils.getMediaType(formatName);
+
+            HttpHeaders headers = new HttpHeaders();
+
+            in = new FileInputStream(uploadPath + "/" + fileName);
+
+            if (mType != null) {
+                headers.setContentType(mType);
+            } else {
+
+                fileName = fileName.substring(fileName.indexOf("_") + 1);
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.add("Content-Disposition",
+                        "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+            }
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+            System.out.println("entity=" + entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+            in.close();
+        }
+        return entity;
+    }
+
+    @ResponseBody
+    @GetMapping("/displayAttach")
+    public ResponseEntity<byte[]> displayAttach(String fileName) throws Exception {
+
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+
+        logger.info("FILE NAME: " + fileName);
+
+        try {
+
+
+            String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+
+            MediaType mType = MediaUtils.getMediaType(formatName);
+            HttpHeaders headers = new HttpHeaders();
+
+
+            in = new FileInputStream(uploadPath + "/detail/" + fileName);
+
+            if (mType != null) {
+                headers.setContentType(mType);
+            } else {
+
+                fileName = fileName.substring(fileName.indexOf("_") + 1);
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.add("Content-Disposition",
+                        "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+            }
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+            System.out.println("entity=" + entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+            in.close();
+        }
+        return entity;
+    }
+
+
+
+
+
+
     private boolean checkFile(MultipartFile m) {
         if(m.getOriginalFilename()==null||m.getOriginalFilename()=="") {
             return false;

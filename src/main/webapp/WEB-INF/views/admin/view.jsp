@@ -44,7 +44,6 @@ label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
 .oriImg { width:500px; height:auto; }
-.thumbImg {}
 .gdsDes img { max-width:600px; height:auto; }
 </style>
 
@@ -73,8 +72,6 @@ textarea#gdsDes { width:400px; height:180px; }
             <form th:role="form" th:method="post" th:autocomplete="off">
 
                 <input type="hidden" name="gdsId" th:value="${goods.gdsId}">
-                <input type="hidden" name="userId" th:value="${goods.userId}">
-
 
                     <div class="inputArea">
                         <label for="gdsCat">카테고리</label>
@@ -104,7 +101,7 @@ textarea#gdsDes { width:400px; height:180px; }
                   <div class="inputArea">
                     <label for="gdsImage">상품사진</label>
                      	<c:if test="${goods.gdsImage != null}">
-                    <img alt="" src="displayFile?fileName=${goods.gdsImage}"></td>
+                    <img class= "oriImg" src="displayFile?fileName=${goods.gdsImage}"></td>
                       </c:if>
                   </div>
 
