@@ -29,21 +29,22 @@ public class ShopController {
     private final ShopService service;
 
     //view = list
+
     @GetMapping("/list")
-    public void getList(@RequestParam(required = false, name = "c") String gdsCat, Model model) throws Exception {
+    public void getList(@RequestParam("c")  String gdsCat,Model model) throws Exception {
         logger.info("get shop list...");
 
-        List<GoodsVO> list = service.list(); // GoodsVO형태의 List형 변수 list 선언
+        List<GoodsVO> list = service.list(gdsCat); // GoodsVO형태의 List형 변수 list 선언
 
         model.addAttribute("list", list); // 변수 list의 값을 list 세션에 부여
 
     }
 
     @GetMapping("/list/view")
-    public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
+    public void getView(@RequestParam("n") String gdsCat, Model model) throws Exception {
         logger.info("get shop view...");
 
-        GoodsVO view = service.goodsView(gdsId);
+        GoodsVO view = service.goodsView(gdsCat);
         model.addAttribute("view", view);
 
     }

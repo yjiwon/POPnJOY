@@ -8,8 +8,7 @@
 	<select id="list" resultType="org.popcorn.domain.GoodsVO">
 		select
 		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage
-		from goods
-		where gdsId = #{gdsId}
+		from goods where gdsCat = #{gdsCat, jdbcType=VARCHAR}
 	</select>
 
 	<select id="goodsView" resultType="org.popcorn.domain.GoodsVO">

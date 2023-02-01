@@ -2,9 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-	<title>Admin ViewPage</title>
+	<title>Admin View Page</title>
 
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script src="/resources/bootstrap/jquery/jquery-3.3.1.min.js"></script>
 
 <link rel="stylesheet" href="/resources/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/bootstrap/bootstrap-theme.min.css">
@@ -44,7 +44,6 @@ label[for='gdsDes'] { display:block; }
 input { width:150px; }
 textarea#gdsDes { width:400px; height:180px; }
 .oriImg { width:500px; height:auto; }
-.gdsDes img { max-width:600px; height:auto; }
 </style>
 
 </head>
@@ -69,7 +68,7 @@ textarea#gdsDes { width:400px; height:180px; }
 
         <div id="container_box">
 
-            <form th:role="form" th:method="post" th:autocomplete="off">
+            <form role="form" method="post" autocomplete="off">
 
                 <input type="hidden" name="gdsId" th:value="${goods.gdsId}">
 
@@ -114,7 +113,7 @@ textarea#gdsDes { width:400px; height:180px; }
 					var formObj = $("form[role='form']");
 
 					$("#modify_Btn").click(function(){
-						formObj.attr("action", "/admin/modify");
+						formObj.attr("action", "modify?n=${goods.gdsId}");
 						formObj.attr("method", "get")
 						formObj.submit();
 					});
@@ -124,7 +123,7 @@ textarea#gdsDes { width:400px; height:180px; }
 						var con = confirm("정말로 삭제하시겠습니까?");
 
 						if(con) {
-							formObj.attr("action", "/admin/delete");
+							formObj.attr("action", "delete?n=${goods.gdsId}");
 							formObj.submit();
 						}
 					});

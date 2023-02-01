@@ -92,25 +92,28 @@ textarea#gdsDes { width:400px; height:180px; }
                 <div class="inputArea">
                     <label for="gdsName">상품명</label>
                     <input type="text" id="gdsName" name="gdsName" value="${goods.gdsName}" />
+                    ${goods.gdsName}
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsPrice">상품가격</label>
                     <input type="text" id="gdsPrice" name="gdsPrice" value="${goods.gdsPrice}" />
+                    ${goods.gdsPrice}
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsStock">상품수량</label>
                     <input type="text" id="gdsStock" name="gdsStock" value="${goods.gdsStock}" />
+                    ${goods.gdsStock}
                 </div>
 
                 <div class="inputArea">
                     <label for="gdsDes">상품소개</label>
-                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" value="${goods.gdsDes}"></textarea>
+                    <textarea rows="5" cols="50" id="gdsDes" name="gdsDes" value="${goods.gdsDes}"> ${goods.gdsDes} </textarea>
                 </div>
 
                     <tr>
-                        <td><input type="file"  value="${goods.gdsImage}" name="attachFile" style="font-size:1.0em;"></td>
+                        <td><input type="file"  value="${goods.gdsImage}" name="attachFile" style="font-size:1.0em;"> ${goods.gdsImage}</td>
                     </tr>
 
                 <div class="inputArea">
@@ -128,7 +131,7 @@ textarea#gdsDes { width:400px; height:180px; }
            </div>
         </section>
                 <footer id="footer">
-		            <  div id="footer_box">
+		            <div id="footer_box">
 			<%@ include file="include/footer.jsp" %>
 		</div>
 			</footer>

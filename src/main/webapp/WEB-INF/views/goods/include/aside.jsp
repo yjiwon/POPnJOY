@@ -7,17 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="shortcut icon" href="resources/static/img/favicon.ico">
+    <link rel="shortcut icon" href="resources/img/favicon.ico">
     <title>매점 주문하기</title>
 
     <!-- Global stylesheets -->
-    <link href="<%=request.getContextPath()%>/resources/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/static/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/static/css/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/static/css/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/static/css/style.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/resources/css/devicons/css/devicons.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/resources/css/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/resources/css/style.css" rel="stylesheet">
   </head>
 
   <body id="page-top">
@@ -33,30 +33,23 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" name="gdsCat" id="gdsCat">
       <ul class="navbar-nav">
+       <li class="nav-item">
+                <a class="nav-link js-scroll-trigger"  href="#about">About</a>
+              </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger"  href="#about">About</a>
+          <a class="nav-link js-scroll-trigger" href="#popcorn">POPCORN</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#popcorn">팝콘</a>
+          <a class="nav-link js-scroll-trigger" href="#drink">DRINK</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#drink">음료</a>
+          <a class="nav-link js-scroll-trigger" href="#hotdog">HOT DOG</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#hotdog">핫도그</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#snack">스낵</a>
+          <a class="nav-link js-scroll-trigger" href="#snack">SNACK</a>
         </li>
       </ul>
     </div>
   </nav>
-
-  <div class="container-fluid p-0">
-  </div>
-  </body>
-
-</aside>
-</html>

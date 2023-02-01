@@ -10,9 +10,9 @@ import java.util.List;
 @Mapper
 public interface ShopMapper {
 
-	public List<GoodsVO> list() throws Exception;
+	public List<GoodsVO> list(String gdsCat) throws Exception;
 
-	public GoodsVO goodsView(int gdsId) throws Exception;
+	public GoodsVO goodsView(String gdsCat) throws Exception;
 
 	// 카트 담기
 	public void addCart(CartListVO cart) throws Exception;

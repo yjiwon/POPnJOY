@@ -5,8 +5,11 @@
 <%@ include file="include/aside.jsp"%>
 
 
+<div class="container-fluid p-0">
+    <c:forEach items="${list}" var="list">
+    <input type="hidden" name="gdsId" value="${list.gdsId}">
 
-    <!--====================================================
+   <!--====================================================
                         ABOUT
     ======================================================-->
       <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
@@ -18,15 +21,13 @@
 
 
     <!--====================================================
-                        팝콘
+                        리스트
     ======================================================-->
 
-    <c:forEach items="${list}" var="list">
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="popcorn">
-
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="${list.gdsCat}">
           <div class="row my-auto">
               <div class="col-12">
-                <h2 class="text-center">팝콘</h2>
+                <h2 class="text-center">${list.gdsCat}</h2>
                 <div class="mb-5 heading-border"></div>
               </div>
               <div class="col-md-12">
@@ -37,9 +38,6 @@
           </div>
 
           <div class="row my-auto">
-
-            <c:if test="${list.gdsCat == popcorn}">
-
               <div class="col-sm-4 portfolio-item filter popcorn">
                   <a class="portfolio-link" href="#Modal1" data-toggle="modal">
                       <div class="caption-port">
@@ -50,118 +48,6 @@
                       <img class="img-fluid" src="${list.gdsImage}" alt="">
                   </a>
               </div>
-              </c:if>
-
-          </div>
-      </section>
-
-
-     <!--====================================================
-                            음료
-        ======================================================-->
-          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="drink">
-
-              <div class="row my-auto">
-                  <div class="col-12">
-                    <h2 class="text-center">팝콘</h2>
-                    <div class="mb-5 heading-border"></div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="port-head-cont">
-
-                    </div>
-                  </div>
-              </div>
-
-              <div class="row my-auto">
-
-                <c:if test="${list.gdsCat == drink}">
-
-                  <div class="col-sm-4 portfolio-item filter popcorn">
-                      <a class="portfolio-link" href="#Modal2" data-toggle="modal">
-                          <div class="caption-port">
-                              <div class="caption-port-content">
-                                  <i class="fa fa-search-plus fa-3x"></i>
-                              </div>
-                          </div>
-                          <img class="img-fluid" src="${list.gdsImage}" alt="">
-                      </a>
-                  </div>
-                  </c:if>
-
-              </div>
-          </section>
-
-     <!--====================================================
-                            핫도그
-        ======================================================-->
-          <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="hotdog">
-
-
-              <div class="row my-auto">
-                  <div class="col-12">
-                    <h2 class="text-center">팝콘</h2>
-                    <div class="mb-5 heading-border"></div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="port-head-cont">
-
-                    </div>
-                  </div>
-              </div>
-
-              <div class="row my-auto">
-
-                <c:if test="${list.gdsCat == hotdog}">
-
-                  <div class="col-sm-4 portfolio-item filter popcorn">
-                      <a class="portfolio-link" href="#Modal3" data-toggle="modal">
-                          <div class="caption-port">
-                              <div class="caption-port-content">
-                                  <i class="fa fa-search-plus fa-3x"></i>
-                              </div>
-                          </div>
-                          <img class="img-fluid" src="${list.gdsImage}" alt="">
-                      </a>
-                  </div>
-                  </c:if>
-
-              </div>
-          </section>
-
- <!--====================================================
-                        스낵
-    ======================================================-->
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="snack">
-
-          <div class="row my-auto">
-              <div class="col-12">
-                <h2 class="text-center">팝콘</h2>
-                <div class="mb-5 heading-border"></div>
-              </div>
-              <div class="col-md-12">
-                <div class="port-head-cont">
-
-                </div>
-              </div>
-          </div>
-
-          <div class="row my-auto">
-
-            <c:if test="${list.gdsCat == snack}">
-
-              <div class="col-sm-4 portfolio-item filter snack">
-                  <a class="portfolio-link" href="#Modal4" data-toggle="modal">
-                      <div class="caption-port">
-                          <div class="caption-port-content">
-                              <i class="fa fa-search-plus fa-3x"></i>
-                          </div>
-                      </div>
-                      <img class="img-fluid" src="${list.gdsImage}" alt="">
-                  </a>
-              </div>
-              </c:if>
-
           </div>
       </section>
 
@@ -191,7 +77,7 @@
                               </div>
                               <div class="row">
                                 <div class="col-md-6">
-                                    <img class="img-fluid img-centered" value="${list.gdsImg}" alt="">
+                                    <img class="img-fluid img-centered" value="${list.gdsImage}" alt="">
                                 </div>
                                   <div class="col-md-6">
                                       <p>${list.gdsDes}</p>
@@ -233,7 +119,7 @@
                             </div>
                             <div class="row">
                               <div class="col-md-6">
-                                  <img class="img-fluid img-centered" value="${list.gdsImg}" alt="">
+                                  <img class="img-fluid img-centered" value="${list.gdsImage}" alt="">
                               </div>
                                 <div class="col-md-6">
                                     <p>${list.gdsDes}</p>
@@ -275,7 +161,7 @@
                             </div>
                             <div class="row">
                               <div class="col-md-6">
-                                  <img class="img-fluid img-centered" value="${list.gdsImg}" alt="">
+                                  <img class="img-fluid img-centered" value="${list.gdsImage}" alt="">
                               </div>
                                 <div class="col-md-6">
                                     <p>${list.gdsDes}</p>
@@ -317,7 +203,7 @@
                             </div>
                             <div class="row">
                               <div class="col-md-6">
-                                  <img class="img-fluid img-centered" value="${list.gdsImg}" alt="">
+                                  <img class="img-fluid img-centered" value="${list.gdsImage}" alt="">
                               </div>
                                 <div class="col-md-6">
                                     <p>${list.gdsDes}</p>
@@ -402,5 +288,4 @@
     });
 
     </script>
-   </body>
-   </html>
+  </div>
