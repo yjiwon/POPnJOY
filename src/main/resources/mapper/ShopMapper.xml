@@ -7,7 +7,7 @@
 
 	<select id="list" resultType="org.popcorn.domain.GoodsVO">
 		select
-		gdsId, gdsName, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage
+		gdsId, gdsCat, gdsPrice, gdsStock, gdsDes, gdsImage
 		from goods where gdsCat = #{gdsCat, jdbcType=VARCHAR}
 	</select>
 

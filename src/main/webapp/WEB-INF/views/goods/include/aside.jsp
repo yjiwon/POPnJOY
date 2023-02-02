@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+  <script ="resources/js/jquery/jquery.min.js"></script>
+  <script ="resources/js/bootstrap/bootstrap.bundle.min.js"></script>
+  <script ="resources/js/jquery-easing/jquery.easing.min.js"></script>
+ <script ="resources/js/counter/jquery.waypoints.min.js"></script>
+  <script ="resources/js/counter/jquery.counterup.min.js"></script>
+  <script ="resources/js/custom.js"></script>
+
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="shortcut icon" href="resources/img/favicon.ico">
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
     <title>매점 주문하기</title>
 
     <!-- Global stylesheets -->
@@ -35,20 +43,22 @@
     </button>
     <div class="collapse navbar-collapse" name="gdsCat" id="gdsCat">
       <ul class="navbar-nav">
-       <li class="nav-item">
-                <a class="nav-link js-scroll-trigger"  href="#about">About</a>
-              </li>
+
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#popcorn">POPCORN</a>
+          <a class="nav-link js-scroll-trigger" href="/goods/list?c=popcorn">POPCORN</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#drink">DRINK</a>
+          <a class="nav-link js-scroll-trigger" href="/goods/list?c=drink">DRINK</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#hotdog">HOT DOG</a>
+          <a class="nav-link js-scroll-trigger" href="/goods/list?c=hotdog">HOT DOG</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#snack">SNACK</a>
+          <a class="nav-link js-scroll-trigger" href="/goods/list?c=snack">SNACK</a>
+        </li>
+        &nbsp;
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger"  href="/goods/index">EXIT</a>
         </li>
       </ul>
     </div>

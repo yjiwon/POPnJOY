@@ -3,11 +3,17 @@ package org.popcorn.controller;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.popcorn.domain.*;
+import org.popcorn.util.MediaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.popcorn.service.ShopService;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -27,11 +35,18 @@ public class ShopController {
 
     private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
     private final ShopService service;
+    private final String uploadPath = "C:\\pop";
 
     //view = list
 
+    @GetMapping("/index")
+    public void getIndex() throws Exception {
+        logger.info("index..........");
+
+    }
+
     @GetMapping("/list")
-    public void getList(@RequestParam("c")  String gdsCat,Model model) throws Exception {
+    public void getList(@RequestParam("c") String gdsCat, Model model) throws Exception {
         logger.info("get shop list...");
 
         List<GoodsVO> list = service.list(gdsCat); // GoodsVO형태의 List형 변수 list 선언
@@ -41,10 +56,10 @@ public class ShopController {
     }
 
     @GetMapping("/list/view")
-    public void getView(@RequestParam("n") String gdsCat, Model model) throws Exception {
+    public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get shop view...");
 
-        GoodsVO view = service.goodsView(gdsCat);
+        GoodsVO view = service.goodsView(gdsId);
         model.addAttribute("view", view);
 
     }
@@ -81,6 +96,48 @@ public class ShopController {
    */
 
 
+    @ResponseBody
+    @GetMapping("/displayFile")
+    public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+
+        logger.info("FILE NAME: " + fileName);
+
+        try {
+
+            String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+            MediaType mType = MediaUtils.getMediaType(formatName);
+
+            HttpHeaders headers = new HttpHeaders();
+
+            in = new FileInputStream(uploadPath + "/" + fileName);
+
+            if (mType != null) {
+                headers.setContentType(mType);
+            } else {
+
+                fileName = fileName.substring(fileName.indexOf("_") + 1);
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                headers.add("Content-Disposition",
+                        "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+            }
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+            System.out.println("entity=" + entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+            in.close();
+        }
+        return entity;
+    }
+    
+    
+    
 
     //카트담기
 

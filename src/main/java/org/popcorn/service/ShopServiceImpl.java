@@ -19,8 +19,8 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public GoodsVO goodsView(String gdsCat) throws Exception {
-		return mapper.goodsView(gdsCat);
+	public GoodsVO goodsView(int gdsId) throws Exception {
+		return mapper.goodsView(gdsId);
 	}
 
 	// 카트 담기
