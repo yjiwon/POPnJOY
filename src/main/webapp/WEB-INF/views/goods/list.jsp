@@ -27,7 +27,7 @@
          <div class="row my-auto">
                <c:forEach items="${list}" var="list">
               <div class="col-md-4 portfolio-item">
-                  <a class=" portfolio-link" href="#Modal" data-toggle="modal">
+                  <a class="portfolio-link" id="goodsModal" data-toggle="modal">
                       <div class="caption-port">
                           <div class="caption-port-content"> </div>
                       <img class="img-fluid" src="displayFile?fileName=${list.gdsImage}">
@@ -36,10 +36,17 @@
                   </a>
                   </c:forEach>
                    </div>
+                        </section>
 
-<!--====================================================
-                  MODALS
-======================================================-->
 
-      </section>
+                        <script>
+                         $(document).ready(function(){
+                              $(".goodsModal").click(function(){
+                                  var gdsId = $("#gdsId").val();
+
+                                       $.ajax({
+                                          url : "/shop/view",
+                                          type : "post",
+                                          data : data,
+                                          success : function(result){
 
