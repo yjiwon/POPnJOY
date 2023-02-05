@@ -50,17 +50,20 @@ public class ShopController {
         logger.info("get shop list...");
 
         List<GoodsVO> list = service.list(gdsCat); // GoodsVO형태의 List형 변수 list 선언
-
         model.addAttribute("list", list); // 변수 list의 값을 list 세션에 부여
 
-    }
 
+
+    }
+    @ResponseBody
     @GetMapping("/list/view")
     public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get shop view...");
 
         GoodsVO view = service.goodsView(gdsId);
         model.addAttribute("view", view);
+
+
 
     }
 
