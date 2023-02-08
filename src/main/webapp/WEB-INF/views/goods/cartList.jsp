@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%@ include file="include/aside.jsp"%>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+ <script
+ 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+ <script
+ 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <style>
 .listResult { padding:20px; background:#eee; }
@@ -16,48 +26,48 @@
   <section class="resume-section p-3 p-lg-5 ">
             <div class="row my-auto">
                 <div class="col-12">
-                  <h2 class="  text-center">My Cart</h2>
+                  <h2 class="  text-center">My cart</h2>
                   <div class="mb-5 heading-border"></div>
                 </div>
 
-                <c:forEach items="${cart}" var="cart">
+               <c:forEach items= "${cartList}" var="cart">
                 <div class="resume-item col-md-6 col-sm-12 ">
                   <div class="card mx-0 p-4 mb-5" style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
                     <div class=" resume-content mr-auto">
                         <h4 class="mb-3"> ${cart.gdsName} </h4>
                         <p>
                         <span> stock : </span> ${cart.cartStock} 개 <br/>
-                        <span> price :  </span> <fmt:formatNumber pattern="###,###,###" value="${cart.gdsPrice * cart.cartStock}" />
-                         ${cart.gdsPrice * cart.cartStock} 원
+                        <span> price :  </span> <fmt:formatNumber pattern="###,###,###" value="${cart.gdsPrice * cart.cartStock}" /> 원
                         </p>
                     </div>
                     <div class="resume-date text-md-right">
-                        <button type="button"  class="delete_btn"> 삭제 </button>
-                        <button type="button"  class="delete_btn"> 삭제 </button>
+
+                        <button type="button" id="delete_btn"  class="delete_btn"> 삭제 </button>
                      <script>
-                     	$("#delete_Btn").click(function(){
+                       $("#delete_btn").on("click",function(){
 
                      						var con = confirm("정말로 삭제하시겠습니까?");
 
                      						if(con) {
-                     							formObj.attr("action", "/shop/deleteCart");
+                     							formObj.attr("action", "/goods/deleteCart");
                      							formObj.submit();
                      						}
                      					});
-                     				</script>
-                    </div>
-                     </div>
-                    </div>
+                     </script>
+                            </div>
+                           </div>
+                         </div>
+                       <c:set var="sum" value="${sum + (cart.gdsPrice * cart.cartStock)}" />
+                      </c:forEach>
                     </div>
                   </div>
                 </div>
               </div>
-              <c:set var="sum" value="${sum + (cart.gdsPrice * cart.cartStock)}" />
-                </c:forEach>
+
 
                 <div class="listResult">
                  <div class="sum">
-                  총 합계 : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원
+                  Total : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원
                  </div>
                  <div class="orderOpne">
                   <button type="button" class="orderOpne_bnt">주문 정보 입력</button>

@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -168,18 +169,17 @@ public class ShopController {
             String ckValue = cookie.getValue();
             cart.setCart_ckid(ckValue);
 
+            //쿠키 시간 재설정해주기
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 60 * 24 * 1);
+            response.addCookie(cookie);
+
+            service.addCart(cart);
+
+            return 1; // 장바구니 추가완료 = '1'
         }
-        //쿠키 시간 재설정해주기
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 60 * 24 * 1);
-        response.addCookie(cookie);
-
-        service.addCart(cart);
-
-        return  1; // 장바구니 추가완료 = '1'
+        return 0;
     }
-
-
 
     @GetMapping("/cartList")
     public String getCartList(HttpSession session, HttpServletRequest request, HttpServletResponse response,
@@ -189,11 +189,14 @@ public class ShopController {
         Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
         //비회원시 쿠키value인 ckid 사용
-        if (cookie != null) {
+       if (cookie != null) {
             String cartCookie = cookie.getValue();
             cart.setCart_ckid(cartCookie);
-         // CartListVO형태 변수 CartList에 상품 정보 저장
-            model.addAttribute("cart",service.cartList(cart));
+            List<CartListVO> cartList  = service.cartList(cart);
+
+             // VO형태의 List형 변수 list 선언
+            model.addAttribute("cartList", cartList); // 변수 list의 값을 list 세션에 부여
+
 
             rttr.addFlashAttribute("msg", "SUCCESS");
         }
