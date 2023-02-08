@@ -40,20 +40,20 @@
 
 	<!-- 카트 담기 -->
 	<insert id="addCart">
-		insert into cart (cartNum, gdsId, cartStock)
-		values (cart_seq.nextval, #{gdsId}, #{cartStock})
+		insert into cart (cartNum, gdsId, CartStock,cart_cklimit, CART_CKID )
+		values (cart_seq.nextval, #{gdsId}, #{CartStock}, sysdate, #{cart_ckid} )
 	</insert>
 
 	<!-- 카트 리스트 -->
 	<select id="cartList" resultType="org.popcorn.domain.CartListVO">
 		select
 		row_number() over(order by c.cartNum desc) as num,
-		c.cartNum, c.gdsId, c.cartStock, name
-		g.gdsName, g.gdsPrice,
+		c.cartNum, c.gdsId, c.cartStock,c.cart_cklimit, c.cart_ckid,
+		g.gdsName, g.gdsPrice
 		from cart c
 		inner join goods g
 		on c.gdsId = g.gdsId
-		where c.name = #{name}
+		where c.cart_ckid = #{cart_ckid}
 	</select>
 
 	<!-- 카트 삭제 -->

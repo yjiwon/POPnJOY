@@ -31,8 +31,8 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 리스트
 	@Override
-	public List<CartListVO> cartList(int cartNum) throws Exception {
-		return mapper.cartList(cartNum);
+	public List<CartListVO> cartList(CartListVO cart) throws Exception {
+		return mapper.cartList(cart);
 	}
 
 	// 카트 삭제

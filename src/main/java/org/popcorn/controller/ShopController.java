@@ -3,7 +3,9 @@ package org.popcorn.controller;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.popcorn.domain.*;
 import org.popcorn.util.MediaUtils;
 import org.slf4j.Logger;
@@ -18,8 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -34,6 +40,7 @@ import java.util.List;
 public class ShopController {
 
     private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
+
     private final ShopService service;
     private final String uploadPath = "C:\\pop";
 
@@ -53,17 +60,15 @@ public class ShopController {
         model.addAttribute("list", list); // 변수 list의 값을 list 세션에 부여
 
 
-
     }
-    @ResponseBody
-    @GetMapping("/list/view")
-    public void getView(@RequestParam("n") int gdsId, Model model) throws Exception {
+
+
+    @GetMapping("/view")
+    public void PostGoodsView(@RequestParam("n") int gdsId, Model model) throws Exception {
         logger.info("get shop view...");
 
         GoodsVO view = service.goodsView(gdsId);
         model.addAttribute("view", view);
-
-
 
     }
 
@@ -138,41 +143,62 @@ public class ShopController {
         }
         return entity;
     }
-    
-    
-    
+
 
     //카트담기
 
     @ResponseBody
-    @PostMapping("/list/addCart")
-    public int addCart(CartListVO cart, HttpSession session) throws Exception {
+    @PostMapping("/view/addCart")
+    public int addCart(CartListVO cart, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        int result = 0; //정상 작동 여부를 확인하기 위한 변수
+        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
-        if (cart != null) {
-            cart.setCartNum(cart.getCartNum());
-            service.addCart(cart);
+        //비회원장바구니 첫 클릭시 쿠키생성
+        if (cookie == null) {
+            String cart_ckid = RandomStringUtils.random(6, true, true);
+            Cookie cartCookie = new Cookie("cartCookie", cart_ckid);
+            cartCookie.setPath("/");
+            cartCookie.setMaxAge(60 * 60 * 24 * 1);
+            response.addCookie(cartCookie);
+            cart.setCart_ckid(cart_ckid);
+            this.service.addCart(cart);
 
-            result = 1;    // 카트리스트가 채워져있으면 카트넘버에 저장시켜서 실행(?) 되려나..
+            //장바구니 쿠키생성 후 상품추가
+        } else if (cookie != null) {
+            String ckValue = cookie.getValue();
+            cart.setCart_ckid(ckValue);
 
         }
+        //쿠키 시간 재설정해주기
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 24 * 1);
+        response.addCookie(cookie);
 
-        return result;
+        service.addCart(cart);
 
-
+        return  1; // 장바구니 추가완료 = '1'
     }
+
+
 
     @GetMapping("/cartList")
-    public void getCartList(int cartNum, RedirectAttributes rttr,  Model model) throws Exception {
-        logger.info("get cart list");
+    public String getCartList(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+                            RedirectAttributes rttr, CartListVO cart, Model model) throws Exception {
+        logger.info("get cart list.......");
 
-        List<CartListVO> cartList = service.cartList(cartNum);  // CartListVO형태 변수 CartList에 상품 정보 저장
-        model.addAttribute("cartList", cartList);
+        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
-        rttr.addFlashAttribute("msg", "SUCCESS");
+        //비회원시 쿠키value인 ckid 사용
+        if (cookie != null) {
+            String cartCookie = cookie.getValue();
+            cart.setCart_ckid(cartCookie);
+         // CartListVO형태 변수 CartList에 상품 정보 저장
+            model.addAttribute("cart",service.cartList(cart));
+
+            rttr.addFlashAttribute("msg", "SUCCESS");
+        }
+        return "/goods/cartList";
     }
-
 
     @PostMapping("/deleteCart")
     public String PostDeleteCart(@RequestParam(value = "n") int gdsId) throws Exception {
@@ -180,7 +206,7 @@ public class ShopController {
 
         service.deleteCart(gdsId);
 
-        return "redirect:/shop/cartList";
+        return "redirect:/goods/cartList";
 
     }
     //주문하기

@@ -2,10 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="include/aside.jsp"%>
+
+<script type= "text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+   <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
 
   <!--====================================================
@@ -27,7 +36,8 @@
          <div class="row my-auto">
                <c:forEach items="${list}" var="list">
               <div class="col-md-4 portfolio-item">
-                  <a class="portfolio-link" href="/goods/list/view?n=${list.gdsId}" data-toggle="modal">
+                  <a class="portfolio-link" href="/goods/view?n=${list.gdsId}" data-toggle="modal">
+
                       <div class="caption-port">
                           <div class="caption-port-content"> </div>
                         <!--  <i class="fa fa-search-plus fa-3x"></i> -->
@@ -44,7 +54,7 @@
                   MODALS
 ======================================================-->
 
-    <div class="portfolio-modal modal fade" id="Modal" tabindex="-1" role="dialog" aria-hidden="true" >
+    <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" >
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="close-modal" data-dismiss="modal">
@@ -55,106 +65,32 @@
               <div class="container">
                   <div class="row">
                           <div class="modal-body">
+                      <!--jsp 들어올 곳-->
 
-                   <!--     <c:forEach items="${view}" var="view"> -->
-                              <div class="title-bar">
-                                <div class="col-md-12">
-                                  <h2 class="text-center">${view.gdsName}</h2>
-                                  <div class="heading-border"></div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                    <img class="img-fluid img-centered" value="displayFile?fileName=${view.gdsImage}"
-                                     alt="">
-                                </div>
-                                  <div class="col-md-6">
-                                      <p>${view.gdsDes}</p>
-                                      <ul class="view-inline item-details">
-                                          <li>가격:
-                                              <strong value="${view.gdsPrice}"> 원                                               </strong>
-                                          </li>
-                                      </ul>
-                                      <button class="btn btn-general btn-white" type="button" data-dismiss="modal">
-                                          <i class="fa fa-times"></i> 카트담기
-                                      </button>
-                              </div>
-                            </div>
-                 <!--        </c:forEach> -->
-                          </div>
-                  </div>
               </div>
           </div>
       </div>
     </div>
-</c:forEach>
-
-<!-- Global javascript -->
-       <script ="resources/js/jquery/jquery.min.js"></script>
-       <script ="resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-       <script ="resources/js/jquery-easing/jquery.easing.min.js"></script>
-       <script ="resources/js/counter/jquery.waypoints.min.js"></script>
-       <script ="resources/js/counter/jquery.counterup.min.js"></script>
-       <script ="resources/js/custom.js"></script>
-       <script>
-           $(document).ready(function(){
-
-           $(". portfolio-link").click(function(){
-               var value = $(this).attr('data-filter');
-               if(value == "all")
-               {
-                   $('.filter').show('1000');
-               }
-               else
-               {
-                   $(".filter").not('.'+value).hide('3000');
-                   $('.filter').filter('.'+value).show('3000');
-               }
-           });
-
-           if ($(".filter-b").removeClass("active")) {
-             $(this).removeClass("active");
-           }
-           $(this).addClass("active");
-           });
-
-               <!-- 카트담기 -->
-
-    $(".btn btn-general btn-white").click(function(){
-     var gdsNum = $("#gdsId").val();
-     var cartStock = $(".numBox").val();
-
-     var data = {
-       gdsNum : gdsNum,
-       cartStock : cartStock
-       };
-
-     $.ajax({
-      url : "/shop/view/addCart",
-      type : "post",
-      data : data,
-      success : function(result){
-
-       if(result == 1) {
-        alert("카트 담기 성공");
-        $(".numBox").val("1");
-       } else {
-        alert("카트에 담긴 상품이 없습니다.")
-        $(".numBox").val("1");
-       }
-      },
-      error : function(){
-       alert("카트 담기 실패");
-      }
-     });
-    });
-
-    </script>
 
 
-<script type="text/javascript">
-	 $('.portfolio-link').on('click', function(e){
-		  e.preventDefault();
-		  $('#Modal').modal('show').find('.container').load($(this).attr('href'));
-		});
+
+<script>
+ $(".portfolio-link").click(function(){
+
+  var formObj = $(".modal-body form[role='form']");
+  var gdsId = $("#gdsId").val();
+
+  var data = {
+    gdsId : gdsId,
+
+    };
+
+  $.ajax({
+   url : "/goods/view",
+   type : "post",
+   data : data,
+   success : function()
+   modal();
+  });
+ });
 </script>

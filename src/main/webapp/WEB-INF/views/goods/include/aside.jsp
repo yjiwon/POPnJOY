@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-  <script ="resources/js/jquery/jquery.min.js"></script>
-  <script ="resources/js/bootstrap/bootstrap.bundle.min.js"></script>
-  <script ="resources/js/jquery-easing/jquery.easing.min.js"></script>
- <script ="resources/js/counter/jquery.waypoints.min.js"></script>
-  <script ="resources/js/counter/jquery.counterup.min.js"></script>
-  <script ="resources/js/custom.js"></script>
-
-
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -31,8 +23,8 @@
   <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none  mx-0 px-0"><img th:src="img/logo-white.png" alt="" class="img-fluid"></span>
+    <a class="navbar-brand js-scroll-trigger" href="/goods/cartList">
+      <span class="d-block d-lg-none  mx-0 px-0"><img src="img/logo-white.png" alt="" class="img-fluid"></span>
       <span class="d-none d-lg-block">
           <img class="img-fluid img-profile rounded-circle mx-auto mb-2" th:src="img/order.png"
             href="/goods/orderList" alt="">

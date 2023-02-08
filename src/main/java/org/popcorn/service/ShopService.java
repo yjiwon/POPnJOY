@@ -13,7 +13,7 @@ public interface ShopService {
 	public void addCart(CartListVO cart) throws Exception;
 
 	// 카트 리스트
-	public List<CartListVO> cartList(int cartNum) throws Exception;
+	public List<CartListVO> cartList(CartListVO cart) throws Exception;
 
 	// 카트 삭제
 	public void deleteCart(int gdsId) throws Exception;

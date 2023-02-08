@@ -45,7 +45,11 @@ dependencies {
 	// implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation ("org.json:json:20200518")
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-	// implementation("com.fasterxml.jackson.core:jackson-databind:2.5.4")
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+	implementation("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+	implementation("org.apache.commons:commons-lang3:3.0")
+
 
 
 
