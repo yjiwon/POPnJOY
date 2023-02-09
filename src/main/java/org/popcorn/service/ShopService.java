@@ -16,7 +16,7 @@ public interface ShopService {
 	public List<CartListVO> cartList(CartListVO cart) throws Exception;
 
 	// 카트 삭제
-	public void deleteCart(int gdsId) throws Exception;
+	public void deleteCart(CartVO cart) throws Exception;
 
 	// 주문 정보
 	public void orderInfo(OrderVO order) throws Exception;

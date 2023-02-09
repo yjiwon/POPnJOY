@@ -37,8 +37,8 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 삭제
 	@Override
-	public void deleteCart(int gdsId) throws Exception {
-		mapper.deleteCart(gdsId);
+	public void deleteCart(CartVO cart) throws Exception {
+		mapper.deleteCart(cart);
 	}
 
 	// 주문 정보

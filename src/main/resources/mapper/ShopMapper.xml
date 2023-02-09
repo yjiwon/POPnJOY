@@ -58,7 +58,7 @@
 
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart">
-		delete cart
+		delete from cart
 		where cartNum = #{cartNum}
 	</delete>
 

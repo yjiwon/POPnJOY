@@ -203,13 +203,14 @@ public class ShopController {
         return "/goods/cartList";
     }
 
+    @ResponseBody
     @PostMapping("/deleteCart")
-    public String PostDeleteCart(@RequestParam(value = "n") int gdsId) throws Exception {
-        logger.info("delete cart");
+    public int PostDeleteCart(CartVO cart) throws Exception {
+        logger.info("delete Cart.........");
 
-        service.deleteCart(gdsId);
+        service.deleteCart(cart);
 
-        return "redirect:/goods/cartList";
+        return 1;
 
     }
     //주문하기

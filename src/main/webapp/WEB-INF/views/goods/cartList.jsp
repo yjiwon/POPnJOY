@@ -41,19 +41,34 @@
                         </p>
                     </div>
                     <div class="resume-date text-md-right">
+                      <a onclick ="deleteCart(${cart.cartNum})"> <i class="btn btn-general btn-white"> 삭제 </i></a>
+                    <script>
+                                         $(document).ready(function(){
 
-                        <button type="button" id="delete_btn"  class="delete_btn"> 삭제 </button>
-                     <script>
-                       $("#delete_btn").on("click",function(){
+                                        var cartNum = $("#cartNum").val();
 
-                     						var con = confirm("정말로 삭제하시겠습니까?");
+                                         });
+                                          function deleteCart(cartNum){
 
-                     						if(con) {
-                     							formObj.attr("action", "/goods/deleteCart");
-                     							formObj.submit();
-                     						}
-                     					});
-                     </script>
+                                         	$.ajax({
+                                         		type : "POST",
+                                         		url : "/goods/deleteCart",
+                                         		dataType : "json",
+                                         		data : {"cartNum" : cartNum},
+                                         		error : function(request, status, error){
+                                                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                                         		},
+                                         		success : function(data){
+                                         			if(data = 1){
+                                         				alert("삭제완료");
+                                         				location.reload();
+                                         			}
+                                         		}
+
+                                         	});
+                                          }
+                     			</script>
+
                             </div>
                            </div>
                          </div>
