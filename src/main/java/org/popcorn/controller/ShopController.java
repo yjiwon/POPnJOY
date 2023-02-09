@@ -213,13 +213,10 @@ public class ShopController {
         return 1;
 
     }
-    //주문하기
-    @PostMapping("/order")
+    //주문하기(모달)
+    @PostMapping("/cartList")
     public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
         logger.info("order");
-
-        CartVO cart = (CartVO)session.getAttribute("cart");
-        int carNum = cart.getCartNum();
 
         // 캘린더 호출
         Calendar cal = Calendar.getInstance();

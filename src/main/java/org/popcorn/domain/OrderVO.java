@@ -7,9 +7,9 @@ import java.util.Date;
 @Data
 public class OrderVO {
 
-	private String orderId;
-	private String orderPhone;
-	private int amount;
-	private Date orderDate;
+	private String orderId; // 주문 고유번호
+	private String orderPhone; //주문자 폰 번호
+	private int amount; //총 가격
+	private Date orderDate; //주문한 시간
 
 }
