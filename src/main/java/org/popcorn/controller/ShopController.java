@@ -214,11 +214,12 @@ public class ShopController {
 
     }
     //주문하기(모달)
+    @ResponseBody
     @PostMapping("/cartList")
-    public String order(HttpSession session, OrderVO order, OrderDetailVO orderDetail) throws Exception {
-        logger.info("order");
+    public int order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
+        logger.info("order....");
 
-        // 캘린더 호출
+        // orderId에 불러 올 캘린더 호출
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);  // 연도 추출
         String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);  // 월 추출
@@ -231,20 +232,16 @@ public class ShopController {
 
         String orderId = ymd + "_" + subNum;  // [연월일]_[랜덤숫자] 로 구성된 문자
 
-        order.setOrderId(orderId);
-      //  order.setOrderPhone(orderPhone);
 
+        order.setOrderId(orderId);
         service.orderInfo(order);
 
         orderDetail.setOrderId(orderId);
         service.orderInfo_Details(orderDetail);
 
-        service.orderInfo(order);
-        service.orderInfo_Details(orderDetail);
+        service.cartAllDelete(orderId);  //주문 테이블, 주문 상세 테이블로 데이터 전송 후 카트 비우기!
 
-        service.cartAllDelete(orderId);
-
-        return "redirect:/shop/orderList";
+        return 1;
     }
 
     // 주문 목록

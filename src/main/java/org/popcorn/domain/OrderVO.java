@@ -8,6 +8,7 @@ import java.util.Date;
 public class OrderVO {
 
 	private String orderId; // 주문 고유번호
+	private int cartNum;
 	private String orderPhone; //주문자 폰 번호
 	private int amount; //총 가격
 	private Date orderDate; //주문한 시간

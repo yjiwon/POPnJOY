@@ -64,21 +64,21 @@
 
 	<!-- 주문 정보 -->
 	<insert id="orderInfo">
-		insert into tbl_order(orderId, orderPhone, amount)
-		values(#{orderId}, #{orderPhone}, #{amount})
+		insert into tbl_order(orderId, cartNum, orderPhone, amount)
+		values(#{orderId}, #{cartNum}, #{orderPhone}, #{amount})
 	</insert>
 
 	<!-- 주문 상세 정보 -->
 	<insert id="orderInfo_Details">
 		insert into tbl_order_details(orderDetailsNum, orderId, gdsId, cartStock)
-		select order_details_seq.nextval, #{orderId}, gdsId, cartStock
+		select tbl_order_details_seq.nextval, #{orderId}, gdsId, cartStock
 		from cart
 	</insert>
 
 	<!-- 카트 비우기 -->
 	<delete id="cartAllDelete">
 		delete cart
-		where cartNum = #{orderId}
+		where cartNum = #{cartNum}
 	</delete>
 
 	<!-- 특정 유저의 주문 목록 -->

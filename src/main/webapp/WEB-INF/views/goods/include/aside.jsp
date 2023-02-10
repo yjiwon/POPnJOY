@@ -7,6 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+    </style>
+
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
     <title>매점 주문하기</title>
 
