@@ -25,7 +25,7 @@ public interface ShopService {
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception;
 
 	// 카트 비우기
-	public void cartAllDelete(String orderId) throws Exception;
+	public void cartAllDelete(OrderVO order) throws Exception;
 
 	// 주문 목록
 	public List<OrderVO> orderList(OrderVO order) throws Exception;

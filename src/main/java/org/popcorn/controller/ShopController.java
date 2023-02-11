@@ -214,9 +214,9 @@ public class ShopController {
 
     }
     //주문하기(모달)
-    @ResponseBody
+
     @PostMapping("/cartList")
-    public int order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
+    public String order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
         logger.info("order....");
 
         // orderId에 불러 올 캘린더 호출
@@ -239,10 +239,18 @@ public class ShopController {
         orderDetail.setOrderId(orderId);
         service.orderInfo_Details(orderDetail);
 
-        service.cartAllDelete(orderId);  //주문 테이블, 주문 상세 테이블로 데이터 전송 후 카트 비우기!
-
-        return 1;
+        return "/goods/cartAllDelete";
     }
+
+    @PostMapping("/cartAllDelete")
+    public void PostCartAllDelete(OrderVO order) throws Exception {
+        logger.info("delete Cart.........");
+
+        service.cartAllDelete(order);
+
+    }
+
+
 
     // 주문 목록
     @GetMapping("/orderList")

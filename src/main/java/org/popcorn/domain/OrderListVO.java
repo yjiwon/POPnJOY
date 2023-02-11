@@ -8,7 +8,7 @@ import java.util.Date;
 public class OrderListVO {
 
 	private String orderId;
-	private int cartNum;
+	private String cart_ckid;
 	private String orderRec;
 	private String orderPhone;
 	private int amount;

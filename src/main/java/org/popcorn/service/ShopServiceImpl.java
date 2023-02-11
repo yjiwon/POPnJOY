@@ -55,8 +55,8 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 비우기 
 	@Override
-	public void cartAllDelete(String orderId) throws Exception {
-		mapper.cartAllDelete(orderId);
+	public void cartAllDelete(OrderVO order) throws Exception {
+		mapper.cartAllDelete(order);
 	}
 
 	// 주문 목록

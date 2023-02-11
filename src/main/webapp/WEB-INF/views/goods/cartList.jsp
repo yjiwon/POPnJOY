@@ -131,11 +131,11 @@
                         <label for="orderPhone">연락처를 입력하세요 : </label>
                          <input type="text" name="orderPhone" id="orderPhone" required="required"  class="form-control"  />
                     	 </div>
-
+                                  </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" id="submit_Btn"  class="btn btn-primary"> 주문하기 </button>
+                                    <button type="submit" id="submit_Btn"  class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
@@ -144,40 +144,6 @@
 
 
                         <script>
-
-
-
-           $(document).ready(function() {
-
-              var cartNum = [[${cart.getCartNum()}]]; // 카트번호
-
-
-             $("#submit_Btn").on("click",function(){
-             if (confirm("정말 구매 하시겠습니까?")) {
-
-		     $.ajax({
-			type:'post',
-			url:'/goods/cartList',
-			headers: {
-			      "Content-Type": "application/json",
-			      "X-HTTP-Method-Override": "POST" },
-			dataType:'text',
-			data: JSON.stringify({cartNum : parseInt(cartNum)}),
-			success : function(data){
-				 if(data = 1){
-                      		 alert("구매성공!");
-                       	} else {
-                       	    alert("구매 실패입니다. 다시 시도하세요");
-                      		 }},
-                 			  error : function(status, error){
-                   		    alert("구매 실패입니다. 잠시 후에 다시 시도하세요");
-
-					    }
-            		})
-            	}})
-            });
-
-
                         $(document).ready(function() {
                              $("#close_modal").click(function() {
                                 $("#orderModal").modal("hide");

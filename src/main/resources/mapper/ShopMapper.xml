@@ -40,7 +40,7 @@
 
 	<!-- 카트 담기 -->
 	<insert id="addCart">
-		insert into cart (cartNum, gdsId, CartStock,cart_cklimit, CART_CKID )
+		insert into cart (cartNum, gdsId, CartStock, cart_cklimit, CART_CKID )
 		values (cart_seq.nextval, #{gdsId}, #{CartStock}, sysdate, #{cart_ckid} )
 	</insert>
 
@@ -64,9 +64,22 @@
 
 	<!-- 주문 정보 -->
 	<insert id="orderInfo">
-		insert into tbl_order(orderId, cartNum, orderPhone, amount)
-		values(#{orderId}, #{cartNum}, #{orderPhone}, #{amount})
+		insert into tbl_order(cart_ckid ,orderId, orderPhone, amount)
+		values( #{cart_ckid} ,#{orderId}, #{orderPhone}, #{amount})
 	</insert>
+
+	<!--주문 리스트-->
+	<select id="orderInfo_2" resultType="com.kubg.domain.OrderVO">
+	select
+	g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
+	gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
+	from tbl_goods g
+	inner join goods_category c
+	on g.cateCode = c.cateCode
+	where g.cateCode = #{cateCode}
+</select>
+
+
 
 	<!-- 주문 상세 정보 -->
 	<insert id="orderInfo_Details">
@@ -77,7 +90,7 @@
 
 	<!-- 카트 비우기 -->
 	<delete id="cartAllDelete">
-		delete cart
+		delete tbl_order
 		where cartNum = #{cartNum}
 	</delete>
 
