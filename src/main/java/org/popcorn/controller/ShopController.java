@@ -226,7 +226,7 @@ public class ShopController {
         String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));  // 일 추출
         String subNum = "";  // 랜덤 숫자를 저장할 문자열 변수
 
-        for(int i = 1; i <= 6; i ++) {  // 6회 반복
+        for(int i = 1; i <= 3; i ++) {  // 3회 반복 - 3자리수가 나올 것이다.
             subNum += (int)(Math.random() * 10);  // 0~9까지의 숫자를 생성하여 subNum에 저장
         }
 
@@ -236,19 +236,17 @@ public class ShopController {
         order.setOrderId(orderId);
         service.orderInfo(order);
 
+        service.orderInfoList(order);
+
         orderDetail.setOrderId(orderId);
         service.orderInfo_Details(orderDetail);
+
+        service.cartAllDelete(orderId);
 
         return "/goods/cartAllDelete";
     }
 
-    @PostMapping("/cartAllDelete")
-    public void PostCartAllDelete(OrderVO order) throws Exception {
-        logger.info("delete Cart.........");
 
-        service.cartAllDelete(order);
-
-    }
 
 
 

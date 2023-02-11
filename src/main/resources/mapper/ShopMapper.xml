@@ -64,21 +64,20 @@
 
 	<!-- 주문 정보 -->
 	<insert id="orderInfo">
-		insert into tbl_order(cart_ckid ,orderId, orderPhone, amount)
-		values( #{cart_ckid} ,#{orderId}, #{orderPhone}, #{amount})
+		insert into tbl_order(orderId, orderPhone, amount)
+		values( #{orderId}, #{orderPhone}, #{amount})
 	</insert>
 
-	<!--주문 리스트-->
-	<select id="orderInfo_2" resultType="com.kubg.domain.OrderVO">
-	select
-	g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName,
-	gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
-	from tbl_goods g
-	inner join goods_category c
-	on g.cateCode = c.cateCode
-	where g.cateCode = #{cateCode}
-</select>
 
+	<select id="orderInfoList" resultType="org.popcorn.domain.OrderVO">
+	select
+		o.orderId, o.orderPhone, o.amount,
+		c.cart_ckid
+		from tbl_order o
+		inner join cart c
+		on o.orderId = c.cart_ckid <!--"o.orderId와 c.cart_ckid이 같다"는 뜻!-->
+	where o.orderId = #{orderId}
+    </select>
 
 
 	<!-- 주문 상세 정보 -->
@@ -90,8 +89,8 @@
 
 	<!-- 카트 비우기 -->
 	<delete id="cartAllDelete">
-		delete tbl_order
-		where cartNum = #{cartNum}
+		delete cart
+		where cart_ckid = #{cart_ckid}
 	</delete>
 
 	<!-- 특정 유저의 주문 목록 -->

@@ -47,6 +47,11 @@ public class ShopServiceImpl implements ShopService {
 		mapper.orderInfo(order);
 	}
 
+	public List<OrderVO> orderInfoList(OrderVO order) throws Exception {
+		return mapper.orderInfoList(order);
+
+	}
+
 	// 주문 상세 정보
 	@Override
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception {
@@ -55,8 +60,8 @@ public class ShopServiceImpl implements ShopService {
 
 	// 카트 비우기 
 	@Override
-	public void cartAllDelete(OrderVO order) throws Exception {
-		mapper.cartAllDelete(order);
+	public void cartAllDelete(String orderId) throws Exception {
+		mapper.cartAllDelete(orderId);
 	}
 
 	// 주문 목록
