@@ -14,6 +14,9 @@
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+
 
 <style>
 
@@ -135,7 +138,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="submit_Btn"  class="btn btn-primary"> 주문하기 </button>
+                                    <button onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
@@ -144,6 +147,30 @@
 
 
                         <script>
+                            var IMP = window.IMP;
+                             IMP.init("imp41708025");
+                              function requestPay() {
+                                        IMP.request_pay({
+                                            pg : 'kcp.{제이필름}',
+                                            pay_method : 'card',
+                                            merchant_uid: "57008833-33004",
+                                            name : '당근 10kg',
+                                            amount : 1004,
+                                            buyer_orderPhone : '010-1234-5678',
+                                            buyer_postcode : '123-456'
+                                        }, function (rsp) { // callback
+                                            if (rsp.success) {
+                                                console.log(rsp);
+                                            } else {
+                                                console.log(rsp);
+                                            }
+                                        });
+                                    }
+
+
+
+
+
                         $(document).ready(function() {
                              $("#close_modal").click(function() {
                                 $("#orderModal").modal("hide");

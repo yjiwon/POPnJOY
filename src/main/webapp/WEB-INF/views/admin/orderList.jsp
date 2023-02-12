@@ -49,7 +49,7 @@
 #container_box table img { width:150px; height:auto; }
 */
 	div#container_box ul li { border:5px solid #eee; padding:10px 20px; margin-bottom:20px; }
-	div#container_box .orderList span { font-size:20px; font-weight:bold; display:inline-block; width:90px; margin-right:10px; }
+	div#container_box .orderList span { font-size:20px; font-weight:bold; display:inline-block; width:150px; margin-right:10px; }
 </style>
 
 

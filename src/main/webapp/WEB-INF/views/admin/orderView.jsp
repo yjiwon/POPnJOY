@@ -91,11 +91,9 @@
 					<c:forEach items="${orderView}" var="orderView" varStatus="status">
 
 						<c:if test="${status.first}">
-							<p><span>주문자</span>${orderView.userId}</p>
-							<p><span>수령인</span>${orderView.orderRec}</p>
-							<p><span>주소</span>(${orderView.userAddr1}) ${orderView.userAddr2} ${orderView.userAddr3}</p>
-							<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.amount}" /> 원</p>
-							<p><span>상태</span>${orderView.delivery}</p>
+							<p><span>주문번호</span>${orderView.orderId}</p>
+							<p><span>주문상품</span>${orderView.gdsId}</p>
+							<p><span></span>${orderView.delivery}</p>
 
 							<div class="deliveryChange">
 								<form role="form" method="post" class="deliveryForm">
@@ -103,16 +101,16 @@
 									<input type="hidden" name="orderId" value="${orderView.orderId}" />
 									<input type="hidden" name="delivery" class="delivery" value="" />
 
-									<button type="button" class="delivery1_btn">호출하기</button>
-									<button type="button" class="delivery2_btn">수령 완료</button>
+									<button type="button" id= "delivery1_btn" class="delivery1_btn">호출하기</button>
+									<button type="button" id= "delivery2_btn" class="delivery2_btn">수령 완료</button>
 
 									<script>
-										$(".delivery1_btn").click(function(){
+										$("#delivery1_btn").click(function(){
 											$(".delivery").val("호출");
 											run();
 										});
 
-										$(".delivery2_btn").click(function(){
+										$("#delivery2_btn").click(function(){
 											$(".delivery").val("수령 완료");
 											run();
 
@@ -139,7 +137,7 @@
 								<span>상품명</span>${orderView.gdsName}<br />
 								<span>개당 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice}" /> 원<br />
 								<span>구입 수량</span>${orderView.cartStock} 개<br />
-								<span>최종 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice * orderView.cartStock}" /> 원
+								 <!-- <span>최종 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice * orderView.cartStock}" /> 원 -->
 							</p>
 						</div>
 					</li>
