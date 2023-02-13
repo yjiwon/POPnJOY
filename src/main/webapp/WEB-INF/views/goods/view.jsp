@@ -5,35 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-
-<head>
-
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
- <script
- 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- <script
- 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
-    <title>상품 상세보기</title>
-
-
-    <!-- Global stylesheets -->
-    <link href="<%=request.getContextPath()%>/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/css/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/css/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-    <link href="<%=request.getContextPath()%>/resources/css/style.css" rel="stylesheet">
-  </head>
-
-
 <!--====================================================
                   MODALS
 ======================================================-->
@@ -114,4 +85,5 @@
                            </div>
                             </form>
                         </div>
+
 

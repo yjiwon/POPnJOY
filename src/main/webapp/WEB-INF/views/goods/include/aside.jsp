@@ -22,6 +22,8 @@
     <link href="<%=request.getContextPath()%>/resources/css/devicons/css/devicons.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/css/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/css/style.css" rel="stylesheet">
+
+
   </head>
 
   <body id="page-top">

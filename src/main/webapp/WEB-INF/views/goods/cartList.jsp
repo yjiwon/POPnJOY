@@ -7,11 +7,8 @@
 <%@ include file="include/aside.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
- <script
- 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- <script
- 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <!-- iamport.payment.js -->
@@ -100,7 +97,7 @@
                  <div class="sum">
                   Total : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원
                  </div>
-                 <div class="orderOpne">
+                 <div class="orderOpen">
                   <button type="button" id="modal_show" data-toggle="modal" data-target="#orderModal"
                  class="orderOpen_bnt">주문 정보 입력</button>
 
@@ -149,14 +146,15 @@
                         <script>
                             var IMP = window.IMP;
                              IMP.init("imp41708025");
-                              function requestPay() {
+
+                              function requestPay(data) {
                                         IMP.request_pay({
                                             pg : 'kcp.{제이필름}',
                                             pay_method : 'card',
-                                            merchant_uid: "57008833-33004",
-                                            name : '당근 10kg',
-                                            amount : 1004,
-                                            buyer_orderPhone : '010-1234-5678',
+                                            merchant_uid: data.orderId,
+                                            name : data.gdsName,
+                                            amount : data.sum,
+                                            buyer_orderPhone : data.orderPhone,
                                             buyer_postcode : '123-456'
                                         }, function (rsp) { // callback
                                             if (rsp.success) {

@@ -6,16 +6,12 @@
 
 <%@ include file="include/aside.jsp"%>
 
-<script type= "text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
-   <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+<!--모달 스크립트 없애니까 됨-->
 
   <!--====================================================
                         리스트
@@ -42,6 +38,18 @@
                           <div class="caption-port-content"> </div>
                         <!--  <i class="fa fa-search-plus fa-3x"></i> -->
                       <img class="img-fluid" src="displayFile?fileName=${list.gdsImage}">
+
+                       <script>
+
+                            $(".portfolio-link").on("click",function(e){
+                              e.preventDefault();
+                              var target = $(this).attr("href");
+
+                              $("#view-modal .modal-body").load(target, function() {
+                                $("#view-modal").modal("show");
+                              });
+                            });
+                      </script>
                           </div>
                       </div>
                   </a>
@@ -50,14 +58,15 @@
                         </section>
 
 
+
 <!--====================================================
                   MODALS
 ======================================================-->
 
-    <div class="portfolio-modal modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" >
+    <div class="portfolio-modal modal show " id="view-modal" tabindex="-1" role="dialog" aria-hidden="true" >
       <div class="modal-dialog" role="document">
           <div class="modal-content">
-              <div class="close-modal" data-dismiss="modal">
+              <div class="close-modal" href="#close-modal" rel="modal:close" data-dismiss="modal">
                   <div class="lr">
                       <div class="rl"></div>
                   </div>
@@ -66,31 +75,7 @@
                   <div class="row">
                           <div class="modal-body">
                       <!--jsp 들어올 곳-->
-
-              </div>
-          </div>
-      </div>
-    </div>
-
-
-
-<script>
- $(".portfolio-link").click(function(){
-
-  var formObj = $(".modal-body form[role='form']");
-  var gdsId = $("#gdsId").val();
-
-  var data = {
-    gdsId : gdsId,
-
-    };
-
-  $.ajax({
-   url : "/goods/view",
-   type : "post",
-   data : data,
-   success : function()
-   modal();
-  });
- });
-</script>
+               </div>
+                    </div>
+                         </div>
+                              </div>
