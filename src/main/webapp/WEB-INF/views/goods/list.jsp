@@ -63,7 +63,7 @@
                   MODALS
 ======================================================-->
 
-    <div class="portfolio-modal modal show " id="view-modal" tabindex="-1" role="dialog" aria-hidden="true" >
+    <div class="portfolio-modal modal " id="view-modal" tabindex="-1" role="dialog" aria-hidden="true" >
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="close-modal" href="#close-modal" rel="modal:close" data-dismiss="modal">
