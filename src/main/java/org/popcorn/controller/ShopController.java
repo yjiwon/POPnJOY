@@ -27,8 +27,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -246,9 +249,73 @@ public class ShopController {
         return "/goods/cartAllDelete";
     }
 
+    @ResponseBody
+    @GetMapping("/kakaopay")
+    public String kakaopay(HttpServletRequest request, OrderVO order,OrderDetailVO orderDetail) throws Exception {
 
+        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
+        HttpSession session = request.getSession();
+        Integer orderId = (Integer) session.getAttribute("orderId");
 
+        service.orderInfo(order);
+
+        service.orderInfoList(order);
+
+        orderDetail.setOrderId(orderId);
+        service.orderInfo_Details(orderDetail);
+
+        int totalAmount = service.getPrice();
+
+        // https://www.youtube.com/watch?v=44ig2NoppbA&t=363s 참고
+        // https://developers.kakao.com/docs/latest/ko/kakaopay/single-payment
+
+        try {
+            URL address = new URL("http://kapi.kakao.com/v1/payment/ready");
+            HttpURLConnection connection = (HttpURLConnection) address.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Authorization", "KakaoAK e19d7afad1b92fb209bf2d9a96a364c5");
+            connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            connection.setDoOutput(true);
+
+            // 꼭 채워야 하는 애들만 채움..
+            String parameter = "cid=TC0ONETIME" // 가맹점 코드
+                    + "&partner_order_id=" + orderId// 가맹점 주문번호
+                    + "&partner_user_id=" + cookie// 가맹점 회원 id
+                    + "&item_name=" + URLEncoder.encode(itemName, "utf-8") // 상품명
+                    + "&quantity=1" // 상품 수량
+                    + "&total_amount=" + totalAmount // 총 금액
+                    + "&tax_free_amount=0" // 상품 비과세 금액
+                    + "&approval_url=http://localhost:8080/goods/cartAllDeletel" // 결제 성공 시 redirect url
+                    + "&fail_url=http://localhost:8080/goods/cartList" // 결제 실패 시
+                    + "&cancel_url=http://localhost:8080/goods/index"; // 결제 취소 시
+            OutputStream send = connection.getOutputStream(); // 줄 수 있음
+            DataOutputStream dataSend = new DataOutputStream(send); // 뭐를? 데이터 주는 애 (매개변수)
+            dataSend.writeBytes(parameter); // 주는애.Bytes형식으로 형변환 됨
+            dataSend.close(); // flush(자기가 가진것을 send에서 비우는 것)가 자동으로 호출이 되고 닫는다. (보내고 비우고 닫다)
+
+            int result = connection.getResponseCode(); // 파라미터가 잘 되었는지 결과 번호를 받음
+            InputStream receive; // 받는 애
+
+            if (result == 200) {  // '200' = 성공
+                receive = connection.getInputStream(); // InputStream을 받음
+            } else {
+                receive = connection.getErrorStream(); // 잘못되면 Error를 나타내 줌
+            }
+            // 읽는 부분
+            InputStreamReader read = new InputStreamReader(receive); // 받아서 읽음.
+            BufferedReader change = new BufferedReader(read); //  BufferedReader형변환을 하는애는 아닌데 해줌..(?)
+
+            // 받는 부분
+            return change.readLine(); // readLine: 형변환을 알아서 해주고 찍어내고 비워짐.
+
+           } catch (MalformedURLException e) {
+            e.printStackTrace();
+           } catch (IOException e) {
+            e.printStackTrace();
+           }
+        return "";
+           }
 
     // 주문 목록
     @GetMapping("/orderList")

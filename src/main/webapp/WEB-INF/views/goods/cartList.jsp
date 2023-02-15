@@ -135,50 +135,44 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" id="Payment" class="btn btn-primary"> 주문하기 </button>
+                                    <button type="button" onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                        <script>
+                             var IMP = window.IMP;
+                             IMP.init("imp41708025"); <!--가맹점 식별코드 -->
 
-                        <script type="text/javascript">
-                        $('#Payment').click(function (data) {
+                               var orderId = $("#orderId").val();
+                               var gdsPrice = $("#gdsPrice").val();
+                               var cartStock = $("#cartStock").val();
+                               var amount = gdsPrice * cartStock;
 
-                           	// 모바일로 결제시 이동페이지
-                           	const pathName = location.pathname;
-                           	const href = location.href;
-                           	const m_redirect = href.replaceAll(pathName, "/goods/cartList");
-                            var IMP = window.IMP;
-                           	IMP.init("imp41708025");
+                         function requestPay() {
+                           IMP.request_pay({
+                             pg: "kakaopay",
+                             pay_method: "card",
+                             merchant_uid : orderId,
+                             name : '시네마 매점 결제',
+                             amount : amount,
+                             buyer_email : '010',
+                           }, function (rsp) { // callback
+                                console.log(rsp);
+                                 if (rsp.success) {
+                                   var msg = '결제가 완료되었습니다. 고객님 주문번호는 번 입니다.';
+                                   alert(msg);
+                                   location.href = "결제 완료 후 이동할 페이지 url"
+                                 } else {
+                                   var msg = '결제에 실패하였습니다.';
+                                   msg += '에러내용 : ' + rsp.error_msg;
+                                   alert(msg);
+                                 }
 
-                          function requestPay() {
-                           	IMP.request_pay({ // param
-                           		pg: "INIBillTst",
-                                pay_method: 'card',
-                           	  	merchant_uid: "20230215_218",
-                           	  	amount: data.amount,
-                           	   	buyer_email: "",
-                           	   	buyer_name: "",
-                           	  	buyer_tel: data.orderPhone,
-                           	  	buyer_addr: "서울시 광진구",
-                           	  	buyer_postcode:data.orderId
-
-                             	},
-                           	function (rsp) { // callback
-                           		if (rsp.success) {
-                                    // 결제 성공 시 로직,
-                           	        data.impUid = rsp.imp_uid;
-                           	        data.merchant_uid = rsp.merchant_uid;
-                           	        paymentComplete(data);
-
-                           		} else {
-                                     // 결제 실패 시 로직,
-                           		   }
-                           		   	})
-}
-                           });
+                                  });
+                                }
 
 
                         $(document).ready(function() {
