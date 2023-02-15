@@ -44,7 +44,6 @@
 		gdsPrice = #{gdsPrice},
 		gdsStock = #{gdsStock},
 		gdsDes = #{gdsDes},
-
 		gdsImage = #{gdsImage},
 
 		where gdsId = ${gdsId}

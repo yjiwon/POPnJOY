@@ -22,8 +22,8 @@
 .listResult .sum { float:left; width:45%; font-size:22px; }
 .listResult { font-family:'맑은 고딕', verdana; padding:20; margin:0; }
 
-.listResult .orderOpne { float:right; width:45%; text-align:right; }
-.listResult .orderOpne button { font-size:18px; padding:5px 10px; border:1px solid #999; background:#fff;}
+.listResult .orderOpen { float:right; width:45%; text-align:right; }
+.listResult .orderOpen button { font-size:18px; padding:5px 10px; border:1px solid #999; background:#fff;}
 .listResult::after { content:""; display:block; clear:both; }
 
 .modal{
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
+                                    <button type="button" id="Payment" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
@@ -143,30 +143,42 @@
                     </div>
 
 
-                        <script>
+                        <script type="text/javascript">
+                        $('#Payment').click(function (data) {
+
+                           	// 모바일로 결제시 이동페이지
+                           	const pathName = location.pathname;
+                           	const href = location.href;
+                           	const m_redirect = href.replaceAll(pathName, "/goods/cartList");
                             var IMP = window.IMP;
-                             IMP.init("imp41708025");
+                           	IMP.init("imp41708025");
 
-                              function requestPay(data) {
-                                        IMP.request_pay({
-                                            pg : 'kcp.{제이필름}',
-                                            pay_method : 'card',
-                                            merchant_uid: data.orderId,
-                                            name : data.gdsName,
-                                            amount : data.sum,
-                                            buyer_orderPhone : data.orderPhone,
-                                            buyer_postcode : '123-456'
-                                        }, function (rsp) { // callback
-                                            if (rsp.success) {
-                                                console.log(rsp);
-                                            } else {
-                                                console.log(rsp);
-                                            }
-                                        });
-                                    }
+                          function requestPay() {
+                           	IMP.request_pay({ // param
+                           		pg: "INIBillTst",
+                                pay_method: 'card',
+                           	  	merchant_uid: "20230215_218",
+                           	  	amount: data.amount,
+                           	   	buyer_email: "",
+                           	   	buyer_name: "",
+                           	  	buyer_tel: data.orderPhone,
+                           	  	buyer_addr: "서울시 광진구",
+                           	  	buyer_postcode:data.orderId
 
+                             	},
+                           	function (rsp) { // callback
+                           		if (rsp.success) {
+                                    // 결제 성공 시 로직,
+                           	        data.impUid = rsp.imp_uid;
+                           	        data.merchant_uid = rsp.merchant_uid;
+                           	        paymentComplete(data);
 
-
+                           		} else {
+                                     // 결제 실패 시 로직,
+                           		   }
+                           		   	})
+}
+                           });
 
 
                         $(document).ready(function() {

@@ -99,9 +99,9 @@ textarea#gdsDes { width:400px; height:180px; }
 
                   <div class="inputArea">
                     <label for="gdsImage">상품사진</label>
-                     	<c:if test="${goods.gdsImage != null}">
-                    <img class= "oriImg" src="displayFile?fileName=${goods.gdsImage}"></td>
-                      </c:if>
+
+                    <img class= "gdsImage" src="displayFile?fileName=${goods.gdsImage}"></td>
+
                   </div>
 
 
@@ -113,7 +113,7 @@ textarea#gdsDes { width:400px; height:180px; }
 					var formObj = $("form[role='form']");
 
 					$("#modify_Btn").click(function(){
-						formObj.attr("action", "modify?n=${goods.gdsId}");
+						formObj.attr("action", "/admin/modify");
 						formObj.attr("method", "get")
 						formObj.submit();
 					});
@@ -125,6 +125,7 @@ textarea#gdsDes { width:400px; height:180px; }
 						if(con) {
 							formObj.attr("action", "delete?n=${goods.gdsId}");
 							formObj.submit();
+							a
 						}
 					});
 				</script>

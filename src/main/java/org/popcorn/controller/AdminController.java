@@ -229,34 +229,37 @@ public class AdminController {
 
 
     @GetMapping("/modify")
-    public void getGoodsModify(@RequestParam("n") int gdsNum, Model model) throws Exception {
+    public void getGoodsModify(@RequestParam("n") int gdsId, Model model) throws Exception {
         // @RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 gdsNum에 저장
 
         logger.info("modify.......");
+
+        GoodsVO goods = service.goodsView(gdsId);  // GoodsViewVO형태 변수 goods에 상품 정보 저장
+        model.addAttribute("goods", goods);
     }
 
     @PostMapping("/modify")
     public String modifyPOST(
-            GoodsVO GoodsVO,@RequestParam(name = "attachFile", required = false) MultipartFile file,
-            RedirectAttributes rttr) throws Exception {
+            GoodsVO GoodsVO,@RequestParam(name = "attachFile", required = false) MultipartFile file, HttpServletRequest req
+           ) throws Exception {
         logger.info("mod post............");
         if (!file.getOriginalFilename().equals("") && checkFile(file)){
             GoodsVO.gdsImage(uploadFile(file.getOriginalFilename(), file.getBytes()));
         } else {
-            GoodsVO.gdsImage("");
+            GoodsVO.setGdsImage(req.getParameter("gdsImage"));
         }
          service.goodsModify(GoodsVO);
-        rttr.addFlashAttribute("msg", "SUCCESS");
-        return "redirect:/admin/view?gdsId=" + GoodsVO.getGdsId();
+
+        return "redirect:/admin/view?n=" + GoodsVO.getGdsId();
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String postGoodsDelete(@RequestParam("n") int gdsId) throws Exception {
         // @RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 gdsNum에 저장
 
         logger.info("post goods delete");
         service.goodsDelete(gdsId);
-        return "redirect:/admin/index";
+        return "redirect:/admin/list";
     }
 
     // 주문 목록
