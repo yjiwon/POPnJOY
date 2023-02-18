@@ -11,8 +11,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
 
 <style>
@@ -135,7 +133,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
+                                    <button type="button" id="kakaopay" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
@@ -143,36 +141,55 @@
                     </div>
 
                         <script>
-                             var IMP = window.IMP;
-                             IMP.init("imp41708025"); <!--가맹점 식별코드 -->
 
-                               var orderId = $("#orderId").val();
-                               var gdsPrice = $("#gdsPrice").val();
-                               var cartStock = $("#cartStock").val();
-                               var amount = gdsPrice * cartStock;
 
-                         function requestPay() {
-                           IMP.request_pay({
-                             pg: "kakaopay",
-                             pay_method: "card",
-                             merchant_uid : orderId,
-                             name : '시네마 매점 결제',
-                             amount : amount,
-                             buyer_email : '010',
-                           }, function (rsp) { // callback
-                                console.log(rsp);
-                                 if (rsp.success) {
-                                   var msg = '결제가 완료되었습니다. 고객님 주문번호는 번 입니다.';
-                                   alert(msg);
-                                   location.href = "결제 완료 후 이동할 페이지 url"
-                                 } else {
-                                   var msg = '결제에 실패하였습니다.';
-                                   msg += '에러내용 : ' + rsp.error_msg;
-                                   alert(msg);
-                                 }
 
-                                  });
-                                }
+                          $(document).ready(function() {
+                          		$("#kakaopay").click(function () {
+                          			if (confirm("정말 구매하시겠습니까?")) {
+
+                                    var orderId = $("#orderId").val();
+                                    var orderPhone = $("#orderPhone").val();
+                                    var amount = $(this).attr("sum");
+
+                                     var data = {
+                                          orderId : orderId,
+                                          orderPhone : orderPhone, <!--콤마 안찍어서 오류남 꼭 확인하기;;-->
+                                         amount : $(this).attr("sum")
+
+                                                };
+                                      $.ajax({
+                          					url:'/goods/cartList',
+                          					type:"post",
+                          					data: data,
+                          					success:function(){
+                          							alert("결제를 진행합니다");
+
+
+
+                                            	$.ajax({
+                          	        		url:"/goods/kakaopay",
+                          	                		dataType:'json',
+                         	                      data:{orderId:orderId},
+                          		               success:function(data){
+                          		            alert(data.tid);	<!-- tdi: 결제 고유 번호-->
+                          			var box = data.next_redirect_pc_url;
+                          			window.open(box); <!--카카오 팝업 뜨는 법-->
+                          				},
+                          					error:function(error){
+                          						alert(error);
+                          							}
+
+                          				    })
+
+                          				  }
+
+
+                          				 })
+                          		     }
+                          		     })
+                          		});
+
 
 
                         $(document).ready(function() {

@@ -45,7 +45,7 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public void orderInfo(OrderVO order) throws Exception {
 		mapper.orderInfo(order);
-	}
+    }
 
 	public List<OrderVO> orderInfoList(OrderVO order) throws Exception {
 		return mapper.orderInfoList(order);

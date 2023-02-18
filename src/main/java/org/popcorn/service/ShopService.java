@@ -18,6 +18,7 @@ public interface ShopService {
 	// 카트 삭제
 	public void deleteCart(CartVO cart) throws Exception;
 
+
 	// 주문 정보
 	public void orderInfo(OrderVO order) throws Exception;
 

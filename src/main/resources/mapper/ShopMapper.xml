@@ -99,8 +99,9 @@
 		orderId,
 		orderPhone, amount, orderDate
 		from  tbl_order
-		where name = #{orderId}
+		where orderId = #{orderId  ,jdbcType=VARCHAR }
 	</select>
+
 
 
 </mapper>

@@ -219,7 +219,7 @@ public class ShopController {
     //주문하기(모달)
 
     @PostMapping("/cartList")
-    public String order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
+    public void order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
         logger.info("order....");
 
         // orderId에 불러 올 캘린더 호출
@@ -235,7 +235,6 @@ public class ShopController {
 
         String orderId = ymd + "_" + subNum;  // [연월일]_[랜덤숫자] 로 구성된 문자
 
-
         order.setOrderId(orderId);
         service.orderInfo(order);
 
@@ -246,26 +245,18 @@ public class ShopController {
 
         service.cartAllDelete(orderId);
 
-        return "/goods/cartAllDelete";
+
     }
 
     @ResponseBody
-    @GetMapping("/kakaopay")
-    public String kakaopay(HttpServletRequest request, OrderVO order,OrderDetailVO orderDetail) throws Exception {
+    @GetMapping ("/kakaopay")
+    public String kakaopay(HttpServletRequest request,OrderVO order, OrderDetailVO orderDetail) throws Exception {
 
-        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+        Cookie user_id = WebUtils.getCookie(request, "cartCookie");
 
-        HttpSession session = request.getSession();
-        Integer orderId = (Integer) session.getAttribute("orderId");
-
-        service.orderInfo(order);
-
-        service.orderInfoList(order);
-
-        orderDetail.setOrderId(orderId);
-        service.orderInfo_Details(orderDetail);
-
-        int totalAmount = service.getPrice();
+        String order_id = order.getOrderId();
+        String itemName = order.getOrderId();
+        int totalAmount = order.getAmount();
 
         // https://www.youtube.com/watch?v=44ig2NoppbA&t=363s 참고
         // https://developers.kakao.com/docs/latest/ko/kakaopay/single-payment
@@ -280,9 +271,9 @@ public class ShopController {
 
             // 꼭 채워야 하는 애들만 채움..
             String parameter = "cid=TC0ONETIME" // 가맹점 코드
-                    + "&partner_order_id=" + orderId// 가맹점 주문번호
-                    + "&partner_user_id=" + cookie// 가맹점 회원 id
-                    + "&item_name=" + URLEncoder.encode(itemName, "utf-8") // 상품명
+                    + "&partner_order_id=" + order_id// 가맹점 주문번호
+                    + "&partner_user_id=" + user_id// 가맹점 회원 id
+                    + "&item_name=" + itemName // 상품명인데 그냥 번호씀..
                     + "&quantity=1" // 상품 수량
                     + "&total_amount=" + totalAmount // 총 금액
                     + "&tax_free_amount=0" // 상품 비과세 금액
@@ -291,11 +282,12 @@ public class ShopController {
                     + "&cancel_url=http://localhost:8080/goods/index"; // 결제 취소 시
             OutputStream send = connection.getOutputStream(); // 줄 수 있음
             DataOutputStream dataSend = new DataOutputStream(send); // 뭐를? 데이터 주는 애 (매개변수)
-            dataSend.writeBytes(parameter); // 주는애.Bytes형식으로 형변환 됨
+            dataSend.writeBytes(parameter); // 주는애. Bytes 형식으로 형변환 됨
             dataSend.close(); // flush(자기가 가진것을 send에서 비우는 것)가 자동으로 호출이 되고 닫는다. (보내고 비우고 닫다)
 
             int result = connection.getResponseCode(); // 파라미터가 잘 되었는지 결과 번호를 받음
             InputStream receive; // 받는 애
+
 
             if (result == 200) {  // '200' = 성공
                 receive = connection.getInputStream(); // InputStream을 받음
@@ -304,7 +296,7 @@ public class ShopController {
             }
             // 읽는 부분
             InputStreamReader read = new InputStreamReader(receive); // 받아서 읽음.
-            BufferedReader change = new BufferedReader(read); //  BufferedReader형변환을 하는애는 아닌데 해줌..(?)
+            BufferedReader change = new BufferedReader(read); //  BufferedReader: 형변환을 하는애는 아닌데 해줌..(?)
 
             // 받는 부분
             return change.readLine(); // readLine: 형변환을 알아서 해주고 찍어내고 비워짐.
