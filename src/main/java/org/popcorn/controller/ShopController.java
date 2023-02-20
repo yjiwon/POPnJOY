@@ -219,7 +219,7 @@ public class ShopController {
     //주문하기(모달)
 
     @PostMapping("/cartList")
-    public void order(OrderVO order, OrderDetailVO orderDetail) throws Exception {
+    public void order(OrderVO order, OrderDetailVO orderDetail,HttpSession session) throws Exception {
         logger.info("order....");
 
         // orderId에 불러 올 캘린더 호출
@@ -235,6 +235,7 @@ public class ShopController {
 
         String orderId = ymd + "_" + subNum;  // [연월일]_[랜덤숫자] 로 구성된 문자
 
+
         order.setOrderId(orderId);
         service.orderInfo(order);
 
@@ -245,17 +246,23 @@ public class ShopController {
 
         service.cartAllDelete(orderId);
 
+        session.setAttribute("orderId",orderId );
+
 
     }
 
     @ResponseBody
     @GetMapping ("/kakaopay")
     public String kakaopay(HttpServletRequest request,OrderVO order, OrderDetailVO orderDetail) throws Exception {
+        logger.info("order....");
 
-        Cookie user_id = WebUtils.getCookie(request, "cartCookie");
+        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
-        String order_id = order.getOrderId();
-        String itemName = order.getOrderId();
+        HttpSession session = request.getSession();
+        String orderId = (String) session.getAttribute("orderId");
+
+     //   String order_id = order.getOrderId();
+        String itemName = order.getOrderPhone();
         int totalAmount = order.getAmount();
 
         // https://www.youtube.com/watch?v=44ig2NoppbA&t=363s 참고
@@ -271,9 +278,9 @@ public class ShopController {
 
             // 꼭 채워야 하는 애들만 채움..
             String parameter = "cid=TC0ONETIME" // 가맹점 코드
-                    + "&partner_order_id=" + order_id// 가맹점 주문번호
-                    + "&partner_user_id=" + user_id// 가맹점 회원 id
-                    + "&item_name=" + itemName // 상품명인데 그냥 번호씀..
+                    + "&partner_order_id=" + orderId// 가맹점 주문번호
+                    + "&partner_user_id=" + cookie// 가맹점 회원 id
+                    + "&item_name=" + itemName// 상품명인데 그냥 번호씀..
                     + "&quantity=1" // 상품 수량
                     + "&total_amount=" + totalAmount // 총 금액
                     + "&tax_free_amount=0" // 상품 비과세 금액

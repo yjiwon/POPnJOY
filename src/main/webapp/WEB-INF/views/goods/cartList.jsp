@@ -150,41 +150,36 @@
 
                                     var orderId = $("#orderId").val();
                                     var orderPhone = $("#orderPhone").val();
-                                    var amount = $(this).attr("sum");
+                                    var amount = $(this).attr("amount");
 
                                      var data = {
                                           orderId : orderId,
                                           orderPhone : orderPhone, <!--콤마 안찍어서 오류남 꼭 확인하기;;-->
-                                         amount : $(this).attr("sum")
+                                         amount : $(this).attr("amount")
 
                                                 };
-                                      $.ajax({
+                                          $.ajax({
                           					url:'/goods/cartList',
                           					type:"post",
                           					data: data,
                           					success:function(){
                           							alert("결제를 진행합니다");
 
-
-
-                                            	$.ajax({
-                          	        		url:"/goods/kakaopay",
-                          	                		dataType:'json',
-                         	                      data:{orderId:orderId},
-                          		               success:function(data){
-                          		            alert(data.tid);	<!-- tdi: 결제 고유 번호-->
-                          			var box = data.next_redirect_pc_url;
-                          			window.open(box); <!--카카오 팝업 뜨는 법-->
+                                          $.ajax({
+                          	        		url:'kakaopay',
+                          	                dataType:'json',
+                         	            //    data:JSON.stringify({orderId:orderId}),
+                          		            success:function(data){
+                          		      //     alert(data.tid);	// <!-- tdi: 결제 고유 번호-->
+                          		        	var box = data.next_redirect_pc_url;
+                          		        	window.open(box); // <!--카카오 팝업 뜨는 법-->
                           				},
                           					error:function(error){
                           						alert(error);
                           							}
 
                           				    })
-
                           				  }
-
-
                           				 })
                           		     }
                           		     })
