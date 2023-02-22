@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +48,9 @@ public class ShopController {
 
     private final ShopService service;
     private final String uploadPath = "C:\\pop";
+
+
+
 
     //view = list
 
@@ -157,6 +161,7 @@ public class ShopController {
 
         Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
+
         //비회원장바구니 첫 클릭시 쿠키생성
         if (cookie == null) {
             String cart_ckid = RandomStringUtils.random(6, true, true);
@@ -219,8 +224,9 @@ public class ShopController {
     //주문하기(모달)
 
     @PostMapping("/cartList")
-    public void order(OrderVO order, OrderDetailVO orderDetail,HttpSession session) throws Exception {
+    public int order(OrderVO order, OrderDetailVO orderDetail,HttpSession session ) throws Exception {
         logger.info("order....");
+
 
         // orderId에 불러 올 캘린더 호출
         Calendar cal = Calendar.getInstance();
@@ -237,6 +243,8 @@ public class ShopController {
 
 
         order.setOrderId(orderId);
+
+
         service.orderInfo(order);
 
         service.orderInfoList(order);
@@ -244,29 +252,30 @@ public class ShopController {
         orderDetail.setOrderId(orderId);
         service.orderInfo_Details(orderDetail);
 
+        service.orderRead(orderId);
+
         service.cartAllDelete(orderId);
 
-        session.setAttribute("orderId",orderId );
 
-
+        return 1;
     }
 
     @ResponseBody
-    @GetMapping ("/kakaopay")
-    public String kakaopay(HttpServletRequest request,OrderVO order, OrderDetailVO orderDetail) throws Exception {
+    @GetMapping ("/goods/kakaopay")
+    public String kakaopay(HttpServletRequest request) throws Exception {
         logger.info("order....");
 
-        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
 
         HttpSession session = request.getSession();
         String orderId = (String) session.getAttribute("orderId");
 
-     //   String order_id = order.getOrderId();
-        String itemName = order.getOrderPhone();
-        int totalAmount = order.getAmount();
+       OrderVO vo = service.orderRead(orderId);
 
-        // https://www.youtube.com/watch?v=44ig2NoppbA&t=363s 참고
-        // https://developers.kakao.com/docs/latest/ko/kakaopay/single-payment
+        Cookie cookie = WebUtils.getCookie(request, "cartCookie");
+     //   String order_id = order.getOrderId();
+         String itemName = vo.getOrderPhone();
+        int totalAmount = vo.getAmount();
+
 
         try {
             URL address = new URL("http://kapi.kakao.com/v1/payment/ready");
@@ -280,7 +289,7 @@ public class ShopController {
             String parameter = "cid=TC0ONETIME" // 가맹점 코드
                     + "&partner_order_id=" + orderId// 가맹점 주문번호
                     + "&partner_user_id=" + cookie// 가맹점 회원 id
-                    + "&item_name=" + itemName// 상품명인데 그냥 번호씀..
+                    + "&item_name = 매점 상품"// 상품명인데 그냥 번호씀..
                     + "&quantity=1" // 상품 수량
                     + "&total_amount=" + totalAmount // 총 금액
                     + "&tax_free_amount=0" // 상품 비과세 금액
@@ -313,6 +322,7 @@ public class ShopController {
            } catch (IOException e) {
             e.printStackTrace();
            }
+
         return "";
            }
 

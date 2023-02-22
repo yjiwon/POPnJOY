@@ -27,6 +27,8 @@ public interface ShopService {
 	// 주문 상세 정보
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception;
 
+	public OrderVO orderRead(String orderId) throws Exception;
+
 	// 카트 비우기
 	public void cartAllDelete(String orderId) throws Exception;
 
@@ -35,6 +37,8 @@ public interface ShopService {
 
 	// 특정 주문 목록
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+
+
 
 
 

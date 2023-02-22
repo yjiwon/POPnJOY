@@ -11,6 +11,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+
 
 
 <style>
@@ -133,57 +135,96 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" id="kakaopay" class="btn btn-primary"> 주문하기 </button>
+                                    <button type="button" onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                        <script>
+            <script>
+            document.cookie = "safeCookie1=foo; SameSite=Lax";
+            document.cookie = "safeCookie2=foo";
+            document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
 
+            // var IMP = window.IMP;
+             IMP.init("imp41708025");
 
-                          $(document).ready(function() {
-                          		$("#kakaopay").click(function () {
-                          			if (confirm("정말 구매하시겠습니까?")) {
+                   var orderId = $("#orderId").val();
+                    var orderPhone = $("#orderPhone").val();
+                   var amount = $("#amonut").val();
 
-                                    var orderId = $("#orderId").val();
-                                    var orderPhone = $("#orderPhone").val();
-                                    var amount = $(this).attr("amount");
+                  var data = {
+                       orderId : orderId,
+                       orderPhone : orderPhone, // 콤마 안찍어서 오류남 꼭 확인하기;;
+                       amount : ${sum}
+                        }
 
-                                     var data = {
-                                          orderId : orderId,
-                                          orderPhone : orderPhone, <!--콤마 안찍어서 오류남 꼭 확인하기;;-->
-                                         amount : $(this).attr("amount")
+           function requestPay() {
+            IMP.request_pay({
+                pg : 'kakaopay',
+                pay_method : 'card',
+                merchant_uid: orderId,
+                name : '매점 상품',
+                amount : ${sum} ,
+               // buyer_name : '손님',
+                buyer_tel : orderPhone,
+            }, function (rsp) { // 결제 성공시.
+                if (rsp.success) {
+                data.impUid = rsp.imp_uid;
+                data.merchant_uid = rsp.merchant_uid;
+                paymentComplete(data);
 
-                                                };
-                                          $.ajax({
-                          					url:'/goods/cartList',
-                          					type:"post",
-                          					data: data,
-                          					success:function(){
-                          							alert("결제를 진행합니다");
+                		} else {
+                           console.log(rsp);
+                           alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                		}
+                	});
+                }
+                 // 계산 완료
+                 function paymentComplete(data) {
 
-                                          $.ajax({
-                          	        		url:'kakaopay',
-                          	                dataType:'json',
-                         	            //    data:JSON.stringify({orderId:orderId}),
-                          		            success:function(data){
-                          		      //     alert(data.tid);	// <!-- tdi: 결제 고유 번호-->
-                          		        	var box = data.next_redirect_pc_url;
-                          		        	window.open(box); // <!--카카오 팝업 뜨는 법-->
-                          				},
-                          					error:function(error){
-                          						alert(error);
-                          							}
+                   $.ajax({
+                      url:"/goods/cartList",
+                      type:'post',
+                       dataType : 'JSON',
+                      data: data,
 
-                          				    })
+                           success: function(data){
+                            if(data = 1) {
+                             console.log(rsp);
+                        	  location.href = "/goods/cartAllDelete";
+
+                          } else { //결제실패시
+                           console.log(rsp);
+                         alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+
+
+                          				   }
                           				  }
-                          				 })
-                          		     }
-                          		     })
-                          		});
+                          				 });
+                          				 };
+
+
+
+
+
+
+                                   /*
+                                          $.ajax({
+                          	        		url:'/goods/kakaopay',
+                          	                dataType:'json',
+                         	           //   data:JSON.stringify({data}),
+                          		            success:function(data){
+                          		          // json.parse(data.tid);	// <!-- tdi: 결제 고유 번호-->
+                          		        	var box = data.next_redirect_pc_url;
+                          		        	window.open(box); }, // <!--카카오 팝업 뜨는 법-->
+
+                          					error:function(error){
+                          						alert(error);  */
+
+
 
 
 

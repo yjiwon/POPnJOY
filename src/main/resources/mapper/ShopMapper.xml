@@ -79,6 +79,13 @@
 	where o.orderId = #{orderId}
     </select>
 
+	<select id="orderRead" resultType="org.popcorn.domain.OrderVO">
+		select
+		orderId, orderPhone, amount
+		from tbl_order o
+		where orderId = #{orderId}
+	</select>
+
 
 	<!-- 주문 상세 정보 -->
 	<insert id="orderInfo_Details">

@@ -3,6 +3,7 @@ package org.popcorn.service;
 import org.popcorn.domain.*;
 import org.popcorn.mapper.ShopMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class ShopServiceImpl implements ShopService {
 
 	@Autowired
 	ShopMapper mapper;
+
 
 	@Override
 	public List<GoodsVO> list(String gdsCat) throws Exception {
@@ -56,6 +58,11 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public void orderInfo_Details(OrderDetailVO orderDetail) throws Exception {
 		mapper.orderInfo_Details(orderDetail);
+	}
+	@Override
+	public OrderVO orderRead(String orderId) throws Exception {
+		return mapper.orderRead(orderId);
+
 	}
 
 	// 카트 비우기 

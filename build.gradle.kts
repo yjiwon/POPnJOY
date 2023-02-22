@@ -49,6 +49,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
 	implementation("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
 	implementation("org.apache.commons:commons-lang3:3.0")
+	implementation("com.google.code.gson:gson:2.7")
 
 
 
