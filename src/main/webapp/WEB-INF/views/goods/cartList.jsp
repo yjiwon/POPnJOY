@@ -135,7 +135,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onclick="requestPay()" class="btn btn-primary"> 주문하기 </button>
+                                  <!--  <button type="button" onclick="requestPay();" id="kakaopay" class="btn btn-primary"> 주문하기 </button> -->
+                                     <button type="submit" id="kakaopay" class="btn btn-primary"> 주문하기 </button>
 
                                 </div>
                             </div>
@@ -143,10 +144,6 @@
                     </div>
 
             <script>
-            document.cookie = "safeCookie1=foo; SameSite=Lax";
-            document.cookie = "safeCookie2=foo";
-            document.cookie = "crossCookie=bar; SameSite=None; Secure";
-
 
             // var IMP = window.IMP;
              IMP.init("imp41708025");
@@ -155,7 +152,7 @@
                     var orderPhone = $("#orderPhone").val();
                    var amount = $("#amonut").val();
 
-                  var data = {
+                 var data = {
                        orderId : orderId,
                        orderPhone : orderPhone, // 콤마 안찍어서 오류남 꼭 확인하기;;
                        amount : ${sum}
@@ -168,48 +165,33 @@
                 merchant_uid: orderId,
                 name : '매점 상품',
                 amount : ${sum} ,
-               // buyer_name : '손님',
+           //      buyer_email: 'buyerEmail',
+            //    buyer_name : '손님',
                 buyer_tel : orderPhone,
+            //     buyer_addr: '서울시 광진구',
+            //     buyer_postcode: '123456',
             }, function (rsp) { // 결제 성공시.
                 if (rsp.success) {
-                data.impUid = rsp.imp_uid;
-                data.merchant_uid = rsp.merchant_uid;
-                paymentComplete(data);
+                	var msg = '결제가 완료되었습니다';
+                	console.log("결제성공. " + msg);
+              $.ajax({
+                                 url:"/goods/payment/complete",
+                                 type:'post',
+                                 dataType : 'JSON',
 
-                		} else {
+                                 data:{  imp_uid : rsp.imp_uid,
+                                      merchant_uid  : rsp.orderId,
+                                      buyer_tel  : rsp.orderPhone,
+                                      amount : ${sum}}
+                  })
+
+
+                   } else {
                            console.log(rsp);
                            alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
                 		}
-                	});
-                }
-                 // 계산 완료
-                 function paymentComplete(data) {
-
-                   $.ajax({
-                      url:"/goods/cartList",
-                      type:'post',
-                       dataType : 'JSON',
-                      data: data,
-
-                           success: function(data){
-                            if(data = 1) {
-                             console.log(rsp);
-                        	  location.href = "/goods/cartAllDelete";
-
-                          } else { //결제실패시
-                           console.log(rsp);
-                         alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-
-
-                          				   }
-                          				  }
-                          				 });
-                          				 };
-
-
-
-
-
+	                        }
+                          )};
 
                                    /*
                                           $.ajax({

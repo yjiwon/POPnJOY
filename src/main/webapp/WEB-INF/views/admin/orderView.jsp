@@ -102,7 +102,7 @@
 									<input type="hidden" name="delivery" class="delivery" value="" />
 
 									<button type="button" id= "delivery1_btn" class="delivery1_btn">호출하기</button>
-									<button type="button" id= "delivery2_btn" class="delivery2_btn">수령 완료</button>
+
 
 									<script>
 										$("#delivery1_btn").click(function(){
@@ -110,11 +110,6 @@
 											run();
 										});
 
-										$("#delivery2_btn").click(function(){
-											$(".delivery").val("수령 완료");
-											run();
-
-										});
 
 										function run(){
 											$(".deliveryForm").submit();

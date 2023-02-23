@@ -224,7 +224,7 @@ public class ShopController {
     //주문하기(모달)
 
     @PostMapping("/cartList")
-    public int order(OrderVO order, OrderDetailVO orderDetail,HttpSession session ) throws Exception {
+    public String order(OrderVO order, OrderDetailVO orderDetail,HttpSession session ) throws Exception {
         logger.info("order....");
 
 
@@ -257,7 +257,7 @@ public class ShopController {
         service.cartAllDelete(orderId);
 
 
-        return 1;
+        return "/goods/cartAllDelete";
     }
 
     @ResponseBody
@@ -353,6 +353,44 @@ public class ShopController {
     }
 
 
+    @PostMapping("/payment/complete")
+    public ResponseEntity<String> paymentComplete (OrderVO order, OrderDetailVO orderDetail,HttpSession session ) throws Exception {
+
+        String token = service.getToken();
+
+        System.out.println("토큰 : " + token);
 
 
-}
+        // orderId에 불러 올 캘린더 호출
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);  // 연도 추출
+        String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);  // 월 추출
+        String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));  // 일 추출
+        String subNum = "";  // 랜덤 숫자를 저장할 문자열 변수
+
+        for(int i = 1; i <= 3; i ++) {  // 3회 반복 - 3자리수가 나올 것이다.
+            subNum += (int)(Math.random() * 10);  // 0~9까지의 숫자를 생성하여 subNum에 저장
+        }
+
+        String orderId = ymd + "_" + subNum;  // [연월일]_[랜덤숫자] 로 구성된 문자
+
+
+        order.setOrderId(orderId);
+
+
+        service.orderInfo(order);
+
+        service.orderInfoList(order);
+
+        orderDetail.setOrderId(orderId);
+        service.orderInfo_Details(orderDetail);
+
+        service.orderRead(orderId);
+
+        service.cartAllDelete(orderId);
+
+
+
+        return new ResponseEntity<String>("결제 에러", HttpStatus.BAD_REQUEST);
+      }
+    }

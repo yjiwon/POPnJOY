@@ -4,6 +4,7 @@ import org.popcorn.domain.GoodsVO;
 import org.popcorn.domain.OrderListVO;
 import org.popcorn.domain.OrderVO;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AdminService {
@@ -34,5 +35,8 @@ public interface AdminService {
 
 	// 수령 상태
 	public void delivery(OrderVO order) throws Exception;
+
+	public void orderDelete(String orderId) throws Exception;
+
 
 }

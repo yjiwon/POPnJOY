@@ -307,6 +307,15 @@ public class AdminController {
         return "redirect:/admin/shop/orderView?n=" + order.getOrderId();
     }
 
+    @GetMapping("/orderDelete")
+    public String postOrderDelete(@RequestParam("n") String orderId) throws Exception {
+
+        logger.info("post order delete");
+        service.orderDelete(orderId);
+
+        return "redirect:/admin/orderList";
+    }
+
 
 }
 

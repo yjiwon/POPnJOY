@@ -38,6 +38,9 @@ public interface AdminMapper {
 	// 수령 상태
 	public void delivery(OrderVO order) throws Exception;
 
+	//수령 후 지우기
+	public void orderDelete(String orderId) throws Exception;
+
 
 
 

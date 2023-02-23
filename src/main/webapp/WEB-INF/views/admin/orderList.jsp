@@ -50,6 +50,9 @@
 */
 	div#container_box ul li { border:5px solid #eee; padding:10px 20px; margin-bottom:20px; }
 	div#container_box .orderList span { font-size:20px; font-weight:bold; display:inline-block; width:150px; margin-right:10px; }
+
+	.button { text-align:right; }
+    	.complete { font-size:16px; background:#fff; border:1px solid #999; margin-left:10px; }
 </style>
 
 
@@ -83,9 +86,13 @@
 					<p><span>가격</span><fmt:formatNumber pattern="###,###,###" value="${orderList.amount}" /> 원</p>
 				</div>
 
+                 <div class="button">
+                 <button type="button" onclick="window.location.href='orderDelete?n=${orderList.orderId}'" class="complete">수령완료</button>
+                 <div>
 
 				</li>
 				</c:forEach>
+
 			</ul>
 
 		</div>

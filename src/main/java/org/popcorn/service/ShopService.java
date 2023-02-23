@@ -2,6 +2,7 @@ package org.popcorn.service;
 
 import org.popcorn.domain.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ShopService {
@@ -38,6 +39,17 @@ public interface ShopService {
 	// 특정 주문 목록
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
 
+	String getToken() throws IOException;
+
+	public interface PaymentService {
+
+		String getToken() throws IOException;
+
+		int paymentInfo(String imp_uid, String access_token);
+
+		public void payMentCancle(String access_token, String imp_uid, String amount, String reason);
+
+	}
 
 
 

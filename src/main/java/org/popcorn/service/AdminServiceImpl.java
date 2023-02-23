@@ -68,7 +68,11 @@ public class AdminServiceImpl implements AdminService {
 	public void delivery(OrderVO order) throws Exception {
 		mapper.delivery(order);
 	}
+	@Override
+	public void orderDelete(String orderId) throws Exception {
+		mapper.orderDelete(orderId);
 
+	}
 	     }
 
 

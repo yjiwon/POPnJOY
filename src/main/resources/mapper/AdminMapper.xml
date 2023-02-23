@@ -105,6 +105,11 @@
 		where orderId = #{orderId}
 	</update>
 
+	<delete id="orderDelete">
+		delete tbl_order
+		where orderId = #{orderId}
+	</delete>
+
 
 	<!-- 상품 수량 조절 -->
 	<update id="changeStock">
