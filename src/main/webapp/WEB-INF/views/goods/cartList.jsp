@@ -136,7 +136,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                   <!--  <button type="button" onclick="requestPay();" id="kakaopay" class="btn btn-primary"> 주문하기 </button> -->
-                                     <button type="submit" id="kakaopay" class="btn btn-primary"> 주문하기 </button>
+                                     <button type="submit" data-toggle="modal" data-target="#cartModal" id="kakaopay" class="btn btn-primary" > 주문하기 </button>
 
                                 </div>
                             </div>
@@ -206,20 +206,13 @@
                           					error:function(error){
                           						alert(error);  */
 
-
-
-
-
                         $(document).ready(function() {
                              $("#close_modal").click(function() {
                                 $("#orderModal").modal("hide");
                             });
                         });
+
                       </script>
 
-
          </form>
-
-
-
         </section>

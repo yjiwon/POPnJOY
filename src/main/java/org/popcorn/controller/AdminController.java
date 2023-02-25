@@ -304,11 +304,11 @@ public class AdminController {
         }
 
 
-        return "redirect:/admin/shop/orderView?n=" + order.getOrderId();
+        return "redirect:/admin/orderList";
     }
 
     @GetMapping("/orderDelete")
-    public String postOrderDelete(@RequestParam("n") String orderId) throws Exception {
+    public String getOrderDelete(@RequestParam("n") String orderId) throws Exception {
 
         logger.info("post order delete");
         service.orderDelete(orderId);
@@ -316,7 +316,17 @@ public class AdminController {
         return "redirect:/admin/orderList";
     }
 
+    @GetMapping("/pos")
+    public void getPos(OrderVO order, Model model) throws Exception {
 
+        logger.info("pos...");
+
+
+        List<OrderVO> orderList = service.orderList();
+
+
+        model.addAttribute("orderList", orderList);
+    }
 }
 
 

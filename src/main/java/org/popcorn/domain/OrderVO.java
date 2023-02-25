@@ -13,5 +13,6 @@ public class OrderVO {
 	private String orderPhone; //주문자 폰 번호
 	private int amount; //총 가격
 	private Date orderDate; //주문한 시간
+	private String delivery; //
 
 }

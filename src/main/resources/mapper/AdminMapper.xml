@@ -101,7 +101,7 @@
 	<!-- 배송 상태 -->
 	<update id="delivery">
 		update tbl_order
-		set delivery = #{delivery}
+		   set delivery = #{delivery}
 		where orderId = #{orderId}
 	</update>
 
