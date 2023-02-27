@@ -35,7 +35,6 @@
 
 </style>
 
-
   <section class="resume-section p-3 p-lg-5 ">
             <div class="row my-auto">
                 <div class="col-12">
@@ -136,7 +135,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                   <!--  <button type="button" onclick="requestPay();" id="kakaopay" class="btn btn-primary"> 주문하기 </button> -->
-                                     <button type="submit" data-toggle="modal" data-target="#cartModal" id="kakaopay" class="btn btn-primary" > 주문하기 </button>
+                                     <button type="submit" id="kakaopay" class="btn btn-primary" > 주문하기 </button>
 
                                 </div>
                             </div>
@@ -145,6 +144,8 @@
 
             <script>
 
+
+/*
             // var IMP = window.IMP;
              IMP.init("imp41708025");
 
@@ -205,6 +206,8 @@
 
                           					error:function(error){
                           						alert(error);  */
+
+
 
                         $(document).ready(function() {
                              $("#close_modal").click(function() {

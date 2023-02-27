@@ -354,13 +354,11 @@ public class ShopController {
 
 
     @GetMapping("/cartAllDelete")
-    public void getCartAllDelete(HttpSession session, CartListVO cart, Model model) throws Exception {
+    public void getCartAllDelete(HttpSession session, OrderVO order, Model model) throws Exception {
         logger.info("get order list");
 
-        List<CartListVO> cartList  = service.cartList(cart);
+       List<OrderListVO> orderView =service.orderView(order);
 
-        // VO형태의 List형 변수 list 선언
-        model.addAttribute("cartList", cartList);
     }
 
     @PostMapping("/payment/complete")

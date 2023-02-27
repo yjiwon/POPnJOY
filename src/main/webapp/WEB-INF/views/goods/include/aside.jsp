@@ -32,7 +32,7 @@
     <a class="navbar-brand js-scroll-trigger" href="/goods/cartList">
       <span class="d-block d-lg-none  mx-0 px-0"><img src="img/logo-white.png" alt="" class="img-fluid"></span>
       <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" th:src="img/order.png"
+          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=request.getContextPath()%>/resources/img/pngegg2.png"
             href="/goods/orderList" alt="">
         </span>
     </a>

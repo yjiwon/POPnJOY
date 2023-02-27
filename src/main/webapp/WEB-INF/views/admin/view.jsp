@@ -106,17 +106,18 @@ textarea#gdsDes { width:400px; height:180px; }
 
 
                     <div class="inputArea">
-                    <button type="button" id="modify_Btn" class="btn btn-warning">수정</button>
+                    <button type="button" id="modify_Btn" onclick="window.location.href='modify?n=${goods.gdsId}'" class="btn btn-warning">수정</button>
                     <button type="button" id="delete_Btn" class="btn btn-danger">삭제</button>
 
                     <script>
 					var formObj = $("form[role='form']");
 
+/*
 					$("#modify_Btn").click(function(){
-						formObj.attr("action", "/admin/modify");
+						formObj.attr("action", "modify?n=${goods.gdsId}");
 						formObj.attr("method", "get")
 						formObj.submit();
-					});
+					});   */
 
 					$("#delete_Btn").click(function(){
 
@@ -125,7 +126,7 @@ textarea#gdsDes { width:400px; height:180px; }
 						if(con) {
 							formObj.attr("action", "delete?n=${goods.gdsId}");
 							formObj.submit();
-							a
+
 						}
 					});
 				</script>

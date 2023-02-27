@@ -105,7 +105,7 @@
 
 									<button type="button" id= "delivery_btn" class="delivery1_btn">호출하기</button>
 
-                                  <!--배달 상태를 1로 바꾸면 pos화면에 뜬다!-->
+                                  <!--배달 상태를 1로 바꾸면 호출화면에 뜬다!-->
 									<script>
 									var formObj = $("form[role='form']");
 

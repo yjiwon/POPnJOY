@@ -243,6 +243,7 @@ public class AdminController {
             GoodsVO GoodsVO,@RequestParam(name = "attachFile", required = false) MultipartFile file, HttpServletRequest req
            ) throws Exception {
         logger.info("mod post............");
+
         if (!file.getOriginalFilename().equals("") && checkFile(file)){
             GoodsVO.gdsImage(uploadFile(file.getOriginalFilename(), file.getBytes()));
         } else {
