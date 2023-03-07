@@ -19,14 +19,13 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping ("/pos/*")
+@RequestMapping ("/member/*")
 public class MemberController {
 
 
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     private final MemberService service ;
-    // BCryptPasswordEncoder passEncoder;
 
 
     @GetMapping("/signin")
@@ -37,20 +36,21 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public String login(MemberVO vo, HttpServletRequest req) throws Exception {
+    public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
         logger.info("post login");
 
         HttpSession session = req.getSession();
 
-        MemberVO login = service.signin(vo);
+        MemberVO login = service.signin(vo);  // MemberVO형 변수 login에 로그인 정보를 저장
 
         if(login == null) {
             session.setAttribute("member", null);
+            rttr.addFlashAttribute("msg", false);
         } else {
             session.setAttribute("member", login);
         }
 
-        return "redirect:/";
+        return "/admin/index";
     }
 
     // 로그아웃

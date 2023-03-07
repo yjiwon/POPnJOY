@@ -21,6 +21,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void signout(HttpSession session) throws Exception {
-		session.invalidate();
+		session.invalidate(); // 세션 정보를 제거함
 	}
 }

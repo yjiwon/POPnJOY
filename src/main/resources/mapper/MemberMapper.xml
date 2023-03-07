@@ -8,9 +8,9 @@
 		있습니다. -->
 
 	<select id="signin" resultType="org.popcorn.domain.MemberVO">
-		select userId, userPw
+		select userId,userPass, verify
 		from
-		member where userId = #{userId} and userPw = #{userPw}
+		member where userId = #{userId} and userPass = #{userPass}
 	</select>
 
 </mapper>

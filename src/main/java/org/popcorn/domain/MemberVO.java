@@ -6,7 +6,7 @@ import lombok.Data;
 public class MemberVO {
 	
 	private String userId;
-	private String userPw;
+	private String userPass;
 	private String userName;
 	private int verify;
 

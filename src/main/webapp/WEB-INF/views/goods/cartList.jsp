@@ -135,7 +135,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                   <!--  <button type="button" onclick="requestPay();" id="kakaopay" class="btn btn-primary"> 주문하기 </button> -->
-                                     <button type="submit" id="kakaopay" class="btn btn-primary" > 주문하기 </button>
+                                     <button type="button" onclick="requestPay();" class="btn btn-primary" > 주문하기 </button>
 
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
             <script>
 
 
-/*
+
             // var IMP = window.IMP;
              IMP.init("imp41708025");
 
