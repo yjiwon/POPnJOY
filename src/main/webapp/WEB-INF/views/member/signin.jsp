@@ -1,53 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <html>
 <head>
 	<title>Admin Page</title>
 
-
+	<link rel="stylesheet" href="/resources/css/signin.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-<div id="root">
-	<header id="header">
-		<div id="header_box">
-			<%@ include file="../admin/include/header.jsp" %>
-		</div>
-	</header>
-
-	<nav id="nav">
-		<div id="nav_box">
-			<%@ include file="../admin/include/nav.jsp" %>
-		</div>
-	</nav>
-	<section id="container">
-	<section id="content">
-    	<form role="form" method="post" autocomplete="off">
-    		<div class="input_area">
-    			<label for="userId">아이디</label>
-    			<input type="text" id="userId" name="userId" />
-    		</div>
-
-    		<div class="input_area">
-    			<label for="userPass">패스워드</label>
-    			<input type="password" id="userPass" name="userPass" />
-    		</div>
-
-    		<button type="submit" id="signin_btn" name="signin_btn">로그인</button>
+<div class="main">
+<p class="sign" align="center">Admin Page Login</p>
+    	<form role="form" method="post" autocomplete="off" class="form1">
+    			<input type="text" class="un" align="center" id="userId" name="userId" placeholder="아이디" />
+    			<input type="password" class="pass" align="center" id="userPass" name="userPass" placeholder="비밀번호" />
+    		<button type="submit" class="submit" align="center" >로그인</button>
 
     		<c:if test="${msg == false}">
-    			<p style="color:#f00;">로그인에 실패했습니다. 아이디 또는 패스워드를 확인하세요.</p>
+    			<p style="color:#f00;" align="center" >아이디 또는 패스워드를 확인하세요.</p>
     		</c:if>
     	</form>
 
-    </section>
 		</div>
-	</section>
 
-	<footer id="footer">
-		<div id="footer_box">
-			<%@ include file="../admin/include/footer.jsp" %>
-		</div>
-	</footer>
-
-</div>
 </body>
 </html>

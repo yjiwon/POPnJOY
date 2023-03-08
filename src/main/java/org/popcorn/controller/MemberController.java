@@ -29,9 +29,8 @@ public class MemberController {
 
 
     @GetMapping("/signin")
-    public void getSignin(MemberVO vo, HttpServletRequest request) throws Exception {
+    public void getSignin() throws Exception {
         logger.info("login......");
-
 
     }
 
@@ -39,18 +38,20 @@ public class MemberController {
     public String login(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
         logger.info("post login");
 
-        HttpSession session = req.getSession();
 
         MemberVO login = service.signin(vo);  // MemberVO형 변수 login에 로그인 정보를 저장
+        HttpSession session = req.getSession(); // 현재 세션 정보를 가져온다.
 
         if(login == null) {
-            session.setAttribute("member", null);
+            session.setAttribute("member", null);   // 로그인에 실패하면 어떠한 값도 안넘어온다.
             rttr.addFlashAttribute("msg", false);
+            return "redirect:/member/signin";
         } else {
-            session.setAttribute("member", login);
+            session.setAttribute("member", login);   // 성공하면 매퍼에 있는 쿼리문에 대한 결과가 넘어오게 된다.
+            // 조건문을 이용해서 값이 있는지 확인 하고 이에 맞게 세션 member에 값을 넣어준다. 멤버에는 매퍼에 있는 쿼리문의 결과가 들어 있다.
         }
 
-        return "/admin/index";
+        return "redirect:/admin/index";
     }
 
     // 로그아웃

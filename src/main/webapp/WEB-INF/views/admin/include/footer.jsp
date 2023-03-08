@@ -2,5 +2,5 @@
 	pageEncoding="UTF-8"%>
 
 <ul>
-	<h2>Pop Cineme</h2>
+	<h2>POP&JOY</h2>
 </ul>
