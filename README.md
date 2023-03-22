@@ -1,4 +1,4 @@
-# POP&JOY(팝앤조이)_개인 프로젝트
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=POPnJOY&fontSize=90" />
 	<div align="center">
   platforms & Languages & Tools
 <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
