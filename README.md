@@ -1,4 +1,6 @@
 # POP&JOY(팝앤조이)_개인 프로젝트
+	<div align="center">
+  platforms & Languages & Tools
 <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=Java&logoColor=white" />
 <img src="https://img.shields.io/badge/IntelliJIDEA-000000?style=flat&logo=IntelliJIDEA&logoColor=white"/>
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/>
